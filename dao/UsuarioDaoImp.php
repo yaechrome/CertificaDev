@@ -43,7 +43,27 @@ class UsuarioDaoImp implements UsuarioDao{
     }
 
     public function listar() {
-        
+        $lista = new ArrayObject();
+        try {
+            $pdo= new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM usuario");
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            foreach ($resultado as $value) {
+                $dto = new UsuarioDto();
+                $dto->setRut($value["rut"]);
+                $dto->setNombre($value["nombre"]);
+                $dto->setApellidoPaterno($value["apellido_paterno"]);
+                $dto->setApellidoMaterno($value["apellido_materno"]);
+                $dto->setContrasena($value["contrasena"]);
+                $dto->setPerfil($value["perfil"]);
+                $lista->append($dto);                
+            }
+            $pdo=NULL;
+        } catch (Exception $exc) {
+            echo "Error dao al listar ".$exc->getMessage();
+        }
+        return $lista;
     }
 
     public function modificar($dto) {
@@ -66,12 +86,13 @@ class UsuarioDaoImp implements UsuarioDao{
         return FALSE;
     }
 
-    public function buscarUsuarioPorRut($rut) {
+
+    public function buscarPorClavePrimaria($id) {
         $usuario = new UsuarioDto();
         try {
             $pdo= new clasePDO();
             $stmt = $pdo->prepare("SELECT * FROM usuario WHERE rut=?");
-            $stmt->bindParam(1, $rut);
+            $stmt->bindParam(1, $id);
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $value) {
@@ -86,7 +107,7 @@ class UsuarioDaoImp implements UsuarioDao{
             }
             $pdo=NULL;
         } catch (Exception $exc) {
-            echo "Error dao al buscar por formato ".$exc->getMessage();
+            echo "Error dao al buscar por clave primaria ".$exc->getMessage();
         }
         return $usuario;
     }

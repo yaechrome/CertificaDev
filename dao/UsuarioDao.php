@@ -8,6 +8,5 @@ interface UsuarioDao extends BaseDao{
 
     public function existeRegistro($key);
     
-    public function buscarUsuarioPorRut($rut);
     
 }
