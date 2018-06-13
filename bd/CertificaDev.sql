@@ -58,9 +58,9 @@ LOCK TABLES `Educacion` WRITE;
 INSERT INTO `Educacion` (`id`, `descripcion`)
 VALUES
 	(1,'Profesional'),
-	(2,'Técnico'),
+	(2,'Tecnico'),
 	(3,'Media'),
-	(4,'Básica'),
+	(4,'Basica'),
 	(5,'No Posee');
 
 /*!40000 ALTER TABLE `Educacion` ENABLE KEYS */;
