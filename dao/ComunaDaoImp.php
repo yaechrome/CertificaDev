@@ -7,4 +7,8 @@ class ComunaDaoImp implements BaseDao{
         
     }
 
+    public function buscarPorClavePrimaria($id) {
+        
+    }
+
 }

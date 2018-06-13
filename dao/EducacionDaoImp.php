@@ -6,4 +6,8 @@ class EducacionDaoImp implements BaseDao{
         
     }
 
+    public function buscarPorClavePrimaria($id) {
+        
+    }
+
 }

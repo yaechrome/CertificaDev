@@ -89,4 +89,8 @@ class PostulacionDaoImp implements PostulacionDao{
         
     }
 
+    public function buscarPorClavePrimaria($id) {
+        
+    }
+
 }
