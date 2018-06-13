@@ -2,6 +2,7 @@
 
 
 class PostulacionDto {
+    private $id;
     private $usuario;
     private $fechaNacimiento;
     private $sexo;
@@ -18,7 +19,15 @@ class PostulacionDto {
     function __construct() {
         
     }
-    function getUsuario() {
+    function getId() {
+        return $this->id;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+        function getUsuario() {
         return $this->usuario;
     }
 
