@@ -13,9 +13,12 @@ class PostulacionDaoImp implements PostulacionDao{
             $postulaciones = $stmt->fetchAll();
             foreach ($postulaciones as $value) {
                 $postulacion = new PostulacionDto();
-                $usuario = null;
-                $comuna = null;
-                $educacion = null;
+                $usuarioDao = new UsuarioDaoImp();
+                $comunaDao = new ComunaDaoImp();
+                $educacionDao = new EducacionDaoImp();
+                $usuario = $usuarioDao->buscarPorClavePrimaria($value["rut"]);
+                $educacion = $educacionDao->buscarPorClavePrimaria($value["educacion"]);
+                $comuna = $comunaDao->buscarPorClavePrimaria($value["comuna"]);
                 $postulacion->setId($value["id"]);
                 $postulacion->setUsuario($usuario);
                 $postulacion->setFechaNacimiento($value["fecha_nacimiento"]);
@@ -78,7 +81,25 @@ class PostulacionDaoImp implements PostulacionDao{
     }
 
     public function agregar($dto) {
-        
+        try {
+            $pdo = new clasePDO();
+            $stmt= $pdo->prepare("INSERT INTO postulacion(rut, fecha_nacimiento,"
+                    . "sexo, telefono,email,direccion,comuna, educacion,experiencia_programacion,) VALUES(?,?,?,?,?)");
+            //dado que pasamos el rut por referencia cambiamos de
+            //bindParam a bindValue
+            $stmt->bindValue(1, $dto->getRut());
+            $stmt->bindValue(2, $dto->getNombre());
+            $stmt->bindValue(3, $dto->getApellidoPaterno());
+            $stmt->bindValue(4, $dto->getApellidoMaterno());
+            $stmt->bindValue(5, $dto->getContrasena());
+            $stmt->execute();
+            if($stmt->rowCount()>0)
+                return TRUE;
+            $pdo=NULL;            
+        } catch (Exception $exc) {
+            echo "Error dao al agregar ".$exc->getMessage();
+        }
+        return FALSE;
     }
 
     public function eliminar($idPostulacion) {
