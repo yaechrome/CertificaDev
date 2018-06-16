@@ -9,5 +9,7 @@ interface PostulacionDao extends BaseDao {
     public function modificar($dto);
     
     public function eliminar($idPostulacion);
+    
+    public function buscarPorFecha($desde, $hasta);
 
 }

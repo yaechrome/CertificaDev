@@ -31,11 +31,11 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>Contraseña</td>
-                        <td><input type="password" name="txtContraseña" value="" /></td>
+                        <td><input type="password" name="txtContraseña1" value="" /></td>
                     </tr>
                     <tr>
                         <td>Repetir Contraseña</td>
-                        <td><input type="password" name="txtContraseña" value="" /></td>
+                        <td><input type="password" name="txtContraseña2" value="" /></td>
                     </tr>
                 </tbody>
             </table>

@@ -15,10 +15,15 @@ class PostulacionDto {
     private $cantidadAhos;
     private $modalidad;
     private $curso;
-    
+    private $fechaPostulacion;
+            
     function __construct() {
         
     }
+    function getFechaPostulacion() {
+        return $this->fechaPostulacion;
+    }
+
     function getId() {
         return $this->id;
     }
@@ -123,4 +128,7 @@ class PostulacionDto {
         $this->curso = $curso;
     }
           
+    function setFechaPostulacion($fechaPostulacion) {
+        $this->fecha_postulacion = $fechaPostulacion;
+    }
 }

@@ -32,6 +32,7 @@ class PostulacionDaoImp implements PostulacionDao{
                 $postulacion->setCantidadAhos($value["cantidad_anhos"]);
                 $postulacion->setModalidad($value["modalidad"]);
                 $postulacion->setCurso($value["curso"]);
+                $postulacion->setFechaPostulacion($value["fecha_postulacion"]);
                 $lista->append($postulacion);
             }
             
@@ -72,6 +73,7 @@ class PostulacionDaoImp implements PostulacionDao{
                 $postulacion->setCantidadAhos($value["cantidad_anhos"]);
                 $postulacion->setModalidad($value["modalidad"]);
                 $postulacion->setCurso($value["curso"]);
+                $postulacion->setFechaPostulacion($value["fecha_postulacion"]);
                 $lista->append($postulacion);
             }
             
@@ -88,7 +90,7 @@ class PostulacionDaoImp implements PostulacionDao{
             $pdo = new clasePDO();
             $stmt= $pdo->prepare("INSERT INTO postulacion(rut, fecha_nacimiento,"
                     . "sexo, telefono,email,direccion,comuna, educacion,experiencia_programacion,"
-                    . "cantidad_anhos, modalidad, curso) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+                    . "cantidad_anhos, modalidad, curso, fecha_postulacion) VALUES(?,?,?,?,?,?,?,?,?,?,?, now())");
             
             $stmt->bindValue(1, $dto->getRut());
             $stmt->bindValue(2, $dto->getFechaNacimiento());
@@ -200,6 +202,49 @@ class PostulacionDaoImp implements PostulacionDao{
             echo "Error dao al buscar postulación ".$exc->getMessage();
         }
         return $postulacion;
+    }
+
+    public function buscarPorFecha($desde, $hasta) {
+       
+        try {
+            $lista = new ArrayObject();
+            $pdo = new clasePDO();
+            $stmt= $pdo->prepare("select * from postulacion where fecha_postulacion BETWEEN CAST(? AS DATE) AND CAST(? AS DATE)");
+            $stmt->bindValue(1, $desde);
+            $stmt->bindValue(2, $hasta);
+            $stmt->execute();
+            $registro = $stmt->fetchAll();
+            foreach ($registro as $value) {
+                $postulacion = new PostulacionDto();
+                $usuarioDao = new UsuarioDaoImp();
+                $comunaDao = new ComunaDaoImp();
+                $educacionDao = new EducacionDaoImp();
+                $usuario = $usuarioDao->buscarPorClavePrimaria($value["rut"]);
+                $educacion = $educacionDao->buscarPorClavePrimaria($value["educacion"]);
+                $comuna = $comunaDao->buscarPorClavePrimaria($value["comuna"]);
+                $postulacion->setId($value["id"]);
+                $postulacion->setUsuario($usuario);
+                $postulacion->setFechaNacimiento($value["fecha_nacimiento"]);
+                $postulacion->setSexo($value["sexo"]);
+                $postulacion->setTelefono($value["telefono"]);
+                $postulacion->setEmail($value["email"]);
+                $postulacion->setDireccion($value["direccion"]);
+                $postulacion->setComuna($comuna);
+                $postulacion->setEducacion($educacion);
+                $postulacion->setExperienciaProgramacion($value["experiencia_programacion"]);
+                $postulacion->setCantidadAhos($value["cantidad_anhos"]);
+                $postulacion->setModalidad($value["modalidad"]);
+                $postulacion->setCurso($value["curso"]);
+                $postulacion->setFechaPostulacion($value["fecha_postulacion"]);
+                $lista->append($postulacion);
+            }
+            
+            $pdo=NULL;     
+            
+        } catch (Exception $exc) {
+            echo "Error dao al listar postulaciones por rango de fecha ".$exc->getMessage();
+        }
+        return $lista;
     }
 
 }

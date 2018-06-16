@@ -96,7 +96,6 @@ class UsuarioDaoImp implements UsuarioDao{
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $value) {
-                $dto = new UsuarioDto();
                 $dto->setRut($value["rut"]);
                 $dto->setNombre($value["nombre"]);
                 $dto->setApellidoPaterno($value["apellido_paterno"]);
