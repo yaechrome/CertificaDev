@@ -53,9 +53,12 @@ class PostulacionDaoImp implements PostulacionDao{
             $registro = $stmt->fetchAll();
             foreach ($registro as $value) {
                 $postulacion = new PostulacionDto();
-                $usuario = null;
-                $comuna = null;
-                $educacion = null;
+                $usuarioDao = new UsuarioDaoImp();
+                $comunaDao = new ComunaDaoImp();
+                $educacionDao = new EducacionDaoImp();
+                $usuario = $usuarioDao->buscarPorClavePrimaria($value["rut"]);
+                $educacion = $educacionDao->buscarPorClavePrimaria($value["educacion"]);
+                $comuna = $comunaDao->buscarPorClavePrimaria($value["comuna"]);
                 $postulacion->setId($value["id"]);
                 $postulacion->setUsuario($usuario);
                 $postulacion->setFechaNacimiento($value["fecha_nacimiento"]);
@@ -84,14 +87,21 @@ class PostulacionDaoImp implements PostulacionDao{
         try {
             $pdo = new clasePDO();
             $stmt= $pdo->prepare("INSERT INTO postulacion(rut, fecha_nacimiento,"
-                    . "sexo, telefono,email,direccion,comuna, educacion,experiencia_programacion,) VALUES(?,?,?,?,?)");
-            //dado que pasamos el rut por referencia cambiamos de
-            //bindParam a bindValue
+                    . "sexo, telefono,email,direccion,comuna, educacion,experiencia_programacion,"
+                    . "cantidad_anhos, modalidad, curso) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+            
             $stmt->bindValue(1, $dto->getRut());
-            $stmt->bindValue(2, $dto->getNombre());
-            $stmt->bindValue(3, $dto->getApellidoPaterno());
-            $stmt->bindValue(4, $dto->getApellidoMaterno());
-            $stmt->bindValue(5, $dto->getContrasena());
+            $stmt->bindValue(2, $dto->getFechaNacimiento());
+            $stmt->bindValue(3, $dto->getSexo());
+            $stmt->bindValue(4, $dto->getTelefono());
+            $stmt->bindValue(5, $dto->getEmail());
+            $stmt->bindValue(6, $dto->getDireccion());
+            $stmt->bindValue(7, $dto->getComuna());
+            $stmt->bindValue(8, $dto->getEducacion());
+            $stmt->bindValue(9, $dto->getExperienciaProgamacion());
+            $stmt->bindValue(10, $dto->getCantidadAhos());
+            $stmt->bindValue(11, $dto->getModalidad());
+            $stmt->bindValue(12, $dto->getCurso());
             $stmt->execute();
             if($stmt->rowCount()>0)
                 return TRUE;
@@ -104,14 +114,92 @@ class PostulacionDaoImp implements PostulacionDao{
 
     public function eliminar($idPostulacion) {
         
+        try {
+            $pdo = new clasePDO();
+            $stmt= $pdo->prepare("delete from postulacion where id=?");
+
+            $stmt->bindValue(1, $idPostulacion);
+
+            $stmt->execute();
+            if($stmt->rowCount()>0)
+                return TRUE;
+            $pdo=NULL;    
+            
+        } catch (Exception $exc) {
+            echo "Error dao al eliminar ".$exc->getMessage();
+        }
+        return FALSE;
     }
 
     public function modificar($dto) {
-        
+         try {
+            $pdo= new clasePDO();
+            $stmt= $pdo->prepare("update postulacion set fecha_nacimiento=?, "
+                    . "sexo=?, telefono=?, email=, direccion=?, comuna=?, "
+                    . "educacion=?, experiencia_programacion=?, "
+                    . "cantidad_anhos=?, modalidad=?, curso=? where id=?");
+            
+            $stmt->bindValue(1, $dto->getFechaNacimiento());
+            $stmt->bindValue(2, $dto->getSexo());
+            $stmt->bindValue(3, $dto->getTelefono());
+            $stmt->bindValue(4, $dto->getEmail());
+            $stmt->bindValue(5, $dto->getDireccion());
+            $stmt->bindValue(6, $dto->getComuna());
+            $stmt->bindValue(7, $dto->getEducacion());
+            $stmt->bindValue(8, $dto->getExperienciaProgamacion());
+            $stmt->bindValue(9, $dto->getCantidadAhos());
+            $stmt->bindValue(10, $dto->getModalidad());
+            $stmt->bindValue(11, $dto->getCurso());  
+            $stmt->bindValue(11, $dto->getId());  
+
+            $stmt->execute();
+            if($stmt->rowCount()>0)
+                return TRUE;
+            $pdo=NULL;                             
+        } catch (Exception $exc) {
+            echo "Error dao al modificar ".$exc->getMessage();
+        }
+        return FALSE;
     }
 
     public function buscarPorClavePrimaria($id) {
-        
+        try {
+            $postulacion = new PostulacionDto();
+            $pdo = new clasePDO();
+            $stmt= $pdo->prepare("select * from postulacion where id=?");
+            $stmt->bindValue(1, $id);
+            $stmt->execute();
+            $registro = $stmt->fetchAll();
+            foreach ($registro as $value) {
+                
+                $usuarioDao = new UsuarioDaoImp();
+                $comunaDao = new ComunaDaoImp();
+                $educacionDao = new EducacionDaoImp();
+                $usuario = $usuarioDao->buscarPorClavePrimaria($value["rut"]);
+                $educacion = $educacionDao->buscarPorClavePrimaria($value["educacion"]);
+                $comuna = $comunaDao->buscarPorClavePrimaria($value["comuna"]);
+                $postulacion->setId($value["id"]);
+                $postulacion->setUsuario($usuario);
+                $postulacion->setFechaNacimiento($value["fecha_nacimiento"]);
+                $postulacion->setSexo($value["sexo"]);
+                $postulacion->setTelefono($value["telefono"]);
+                $postulacion->setEmail($value["email"]);
+                $postulacion->setDireccion($value["direccion"]);
+                $postulacion->setComuna($comuna);
+                $postulacion->setEducacion($educacion);
+                $postulacion->setExperienciaProgramacion($value["experiencia_programacion"]);
+                $postulacion->setCantidadAhos($value["cantidad_anhos"]);
+                $postulacion->setModalidad($value["modalidad"]);
+                $postulacion->setCurso($value["curso"]);
+                
+            }
+            
+            $pdo=NULL;     
+            
+        } catch (Exception $exc) {
+            echo "Error dao al buscar postulación ".$exc->getMessage();
+        }
+        return $postulacion;
     }
 
 }
