@@ -39,6 +39,49 @@ CREATE TABLE `Comuna` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `Comuna` WRITE;
+/*!40000 ALTER TABLE `Comuna` DISABLE KEYS */;
+
+INSERT INTO `Comuna` (`id`, `descripcion`)
+VALUES
+	(1,'Cerrillos'),
+	(2,'Cerro Navia'),
+	(3,'Conchali'),
+	(4,'El Bosque'),
+	(5,'Estacion Central'),
+	(6,'Huechuraba'),
+	(7,'Independencia'),
+	(8,'La Cisterna'),
+	(9,'La Florida'),
+	(10,'La Granja'),
+	(11,'La Pintana'),
+	(12,'La Reina'),
+	(13,'Las Condes'),
+	(14,'Lo Barnechea'),
+	(15,'Lo Espejo'),
+	(16,'Lo Prado'),
+	(17,'Macul'),
+	(18,'Maipu'),
+	(19,'Nunoa'),
+	(20,'Padre Hurtado'),
+	(21,'Pedro Aguirre Cerda'),
+	(22,'Penalolen'),
+	(23,'Providencia'),
+	(24,'Pudahuel'),
+	(25,'Puente Alto'),
+	(26,'Quilicura'),
+	(27,'Quinta Normal'),
+	(28,'Recoleta'),
+	(29,'Renca'),
+	(30,'San Bernardo'),
+	(31,'San Joaquin'),
+	(32,'San Miguel'),
+	(33,'San Ramon'),
+	(34,'Santiago'),
+	(35,'Vitacura');
+
+/*!40000 ALTER TABLE `Comuna` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Volcado de tabla Educacion
@@ -90,19 +133,21 @@ CREATE TABLE `Usuario` (
 DROP TABLE IF EXISTS `Postulacion`;
 
 CREATE TABLE `Postulacion` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `rut` VARCHAR(15) NOT NULL DEFAULT '',
-  `fecha_nacimiento` DATE NOT NULL,
-  `sexo` VARCHAR(1) NOT NULL DEFAULT '',
-  `telefono` VARCHAR(20) NOT NULL DEFAULT '',
-  `email` VARCHAR(50) NOT NULL DEFAULT '',
-  `direccion` VARCHAR(50) NOT NULL DEFAULT '',
-  `comuna` INT(11) UNSIGNED NOT NULL,
-  `educacion` INT(11) UNSIGNED NOT NULL,
-  `experiencia_programacion` BIT(1) NOT NULL,
-  `cantidad_anhos` INT(11) DEFAULT NULL,
-  `modalidad` VARCHAR(50) NOT NULL DEFAULT '',
-  `curso` VARCHAR(50) NOT NULL DEFAULT '',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `rut` varchar(15) NOT NULL DEFAULT '',
+  `fecha_nacimiento` date NOT NULL,
+  `sexo` varchar(1) NOT NULL DEFAULT '',
+  `telefono` varchar(20) NOT NULL DEFAULT '',
+  `email` varchar(50) NOT NULL DEFAULT '',
+  `direccion` varchar(50) NOT NULL DEFAULT '',
+  `comuna` int(11) unsigned NOT NULL,
+  `educacion` int(11) unsigned NOT NULL,
+  `experiencia_programacion` bit(1) NOT NULL,
+  `cantidad_anhos` int(11) DEFAULT NULL,
+  `modalidad` varchar(50) NOT NULL DEFAULT '',
+  `curso` varchar(50) NOT NULL DEFAULT '',
+  `fecha_postulacion` date NOT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'Pendiente',
   PRIMARY KEY (`id`),
   KEY `RelacionUsuarioPostulacion` (`rut`),
   KEY `ComunaPostulacion` (`comuna`),
@@ -110,10 +155,7 @@ CREATE TABLE `Postulacion` (
   CONSTRAINT `ComunaPostulacion` FOREIGN KEY (`comuna`) REFERENCES `Comuna` (`id`),
   CONSTRAINT `Educacion` FOREIGN KEY (`educacion`) REFERENCES `Educacion` (`id`),
   CONSTRAINT `RelacionUsuarioPostulacion` FOREIGN KEY (`rut`) REFERENCES `Usuario` (`rut`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
