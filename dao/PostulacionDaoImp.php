@@ -1,5 +1,11 @@
 <?php
-
+include_once '../bd/ClasePDO.php';
+include_once '../dto/PostulacionDto.php';
+include_once '../dto/ComunaDto.php';
+include_once '../dto/EducacionDto.php';
+include_once '../dto/UsuarioDto.php';
+include_once 'BaseDao.php';
+include_once 'PostulacionDao.php';
 
 class PostulacionDaoImp implements PostulacionDao{
     

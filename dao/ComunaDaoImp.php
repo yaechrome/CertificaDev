@@ -1,5 +1,5 @@
 <?php
-
+include_once '../bd/ClasePDO.php';
 
 class ComunaDaoImp implements BaseDao{
     

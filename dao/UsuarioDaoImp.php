@@ -1,4 +1,8 @@
 <?php
+include_once '../bd/ClasePDO.php';
+include_once "UsuarioDao.php";
+include_once '../dto/UsuarioDto.php';
+include_once "BaseDao.php";
 
 
 class UsuarioDaoImp implements UsuarioDao{
@@ -7,9 +11,8 @@ class UsuarioDaoImp implements UsuarioDao{
         try {
             $pdo = new clasePDO();
             $stmt= $pdo->prepare("INSERT INTO usuario(rut, nombre,"
-                    . "apellido_paterno, apellido_materno,contraseña) VALUES(?,?,?,?,?)");
-            //dado que pasamos el rut por referencia cambiamos de
-            //bindParam a bindValue
+                    . "apellido_paterno, apellido_materno,contrasena) VALUES(?,?,?,?,?)");
+
             $stmt->bindValue(1, $dto->getRut());
             $stmt->bindValue(2, $dto->getNombre());
             $stmt->bindValue(3, $dto->getApellidoPaterno());
@@ -88,7 +91,7 @@ class UsuarioDaoImp implements UsuarioDao{
 
 
     public function buscarPorClavePrimaria($id) {
-        $usuario = new UsuarioDto();
+        $usuario = null;
         try {
             $pdo= new clasePDO();
             $stmt = $pdo->prepare("SELECT * FROM usuario WHERE rut=?");
@@ -96,6 +99,7 @@ class UsuarioDaoImp implements UsuarioDao{
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $value) {
+                $usuario = new UsuarioDto();
                 $dto->setRut($value["rut"]);
                 $dto->setNombre($value["nombre"]);
                 $dto->setApellidoPaterno($value["apellido_paterno"]);
