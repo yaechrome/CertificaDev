@@ -6,12 +6,16 @@
     </head>
     <body>
         <form action="agregarPostulacion.php" method="POST">
-
+        <?php
+        if(isset($_SESSION["usuario"])){ ?>
             <table border="0">
                 <tbody>
+                    <?php
+                    include_once '../dto/UsuarioDto.php';
+                    ?>
                     <tr>
                         <td>Rut</td>
-                        <td><input type="text" name="txtRut" value="" disabled="true"/></td>
+                        <td><input type="text" name="txtRut" value="<?php echo $usuario->getRut(); ?>" disabled="true"/></td>
                         <td>Direccion</td>
                         <td><input type="text" name="txtDireccion" value="" /></td>
                     </tr>
@@ -58,7 +62,7 @@
                             cantidad años 
                         </td>
                         <td>
-                            <input type="number" name="txtAños" value="18" />
+                            <input type="number" name="txtAhos" value="18" />
                         </td>
                     </tr>
                     <tr>
@@ -93,6 +97,9 @@
             <br>            
             <input type="submit" value="Postular" name="btnPostular" />
         </form>
+        <?php         
+        }      
+        ?>
     </body>
 </html>
 
