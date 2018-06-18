@@ -2,7 +2,6 @@
 include_once '../dto/UsuarioDto.php';
 include_once '../dao/UsuarioDaoImp.php';
 
-
 $dao = new UsuarioDaoImp();
 $rut = trim($_POST["txtRut"]);
 $nombre = trim($_POST["txtNombre"]);
@@ -17,8 +16,8 @@ if($rut== "" || $nombre== "" || $apellidoP== "" || $apellidoM== "" || $contrasen
     $mensaje= "Debe ingresar todos los datos solicitados";
     
 }else{
-    $buscar= $dao->buscarPorClavePrimaria($rut);
-    if($buscar!=null){
+    $buscar= $dao->existeRegistro($rut);
+    if($buscar){
         $mensaje= "Usuario ya existe";
     }else{
         
@@ -42,7 +41,5 @@ if($rut== "" || $nombre== "" || $apellidoP== "" || $apellidoM== "" || $contrasen
     }
     
 }
-
 echo "<script> alert('$mensaje') </script>";
-
 include_once 'ventanaAgregarUsuario.php';

@@ -1,7 +1,7 @@
 <?php
 
-
 class PostulacionDto {
+
     private $id;
     private $usuario;
     private $fechaNacimiento;
@@ -16,10 +16,20 @@ class PostulacionDto {
     private $modalidad;
     private $curso;
     private $fechaPostulacion;
-            
+    private $estado;
+
     function __construct() {
         
     }
+
+    function getEstado() {
+        return $this->estado;
+    }
+
+    function setEstado($estado) {
+        $this->estado = $estado;
+    }
+
     function getFechaPostulacion() {
         return $this->fechaPostulacion;
     }
@@ -32,7 +42,7 @@ class PostulacionDto {
         $this->id = $id;
     }
 
-        function getUsuario() {
+    function getUsuario() {
         return $this->usuario;
     }
 
@@ -127,8 +137,9 @@ class PostulacionDto {
     function setCurso($curso) {
         $this->curso = $curso;
     }
-          
+
     function setFechaPostulacion($fechaPostulacion) {
         $this->fecha_postulacion = $fechaPostulacion;
     }
+
 }

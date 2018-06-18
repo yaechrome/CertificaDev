@@ -1,4 +1,5 @@
 <?php
+
 include_once '../bd/ClasePDO.php';
 include_once '../dto/PostulacionDto.php';
 include_once '../dto/ComunaDto.php';
@@ -7,15 +8,15 @@ include_once '../dto/UsuarioDto.php';
 include_once 'BaseDao.php';
 include_once 'PostulacionDao.php';
 
-class PostulacionDaoImp implements PostulacionDao{
-    
+class PostulacionDaoImp implements PostulacionDao {
+
     public function listar() {
         try {
             $lista = new ArrayObject();
             $pdo = new clasePDO();
-            $stmt= $pdo->prepare("select * from postulacion");
+            $stmt = $pdo->prepare("select * from postulacion");
             $stmt->execute();
-            
+
             $postulaciones = $stmt->fetchAll();
             foreach ($postulaciones as $value) {
                 $postulacion = new PostulacionDto();
@@ -39,13 +40,13 @@ class PostulacionDaoImp implements PostulacionDao{
                 $postulacion->setModalidad($value["modalidad"]);
                 $postulacion->setCurso($value["curso"]);
                 $postulacion->setFechaPostulacion($value["fecha_postulacion"]);
+                $postulacion->setEstado($value["estado"]);
                 $lista->append($postulacion);
             }
-            
-            $pdo=NULL;     
-            
+
+            $pdo = NULL;
         } catch (Exception $exc) {
-            echo "Error dao al listar Postulaciones ".$exc->getMessage();
+            echo "Error dao al listar Postulaciones " . $exc->getMessage();
         }
         return $lista;
     }
@@ -54,7 +55,7 @@ class PostulacionDaoImp implements PostulacionDao{
         try {
             $lista = new ArrayObject();
             $pdo = new clasePDO();
-            $stmt= $pdo->prepare("select * from postulacion where rut=?");
+            $stmt = $pdo->prepare("select * from postulacion where rut=?");
             $stmt->bindValue(1, $rut);
             $stmt->execute();
             $registro = $stmt->fetchAll();
@@ -80,13 +81,13 @@ class PostulacionDaoImp implements PostulacionDao{
                 $postulacion->setModalidad($value["modalidad"]);
                 $postulacion->setCurso($value["curso"]);
                 $postulacion->setFechaPostulacion($value["fecha_postulacion"]);
+                $postulacion->setEstado($value["estado"]);
                 $lista->append($postulacion);
             }
-            
-            $pdo=NULL;     
-            
+
+            $pdo = NULL;
         } catch (Exception $exc) {
-            echo "Error dao al listar postulaciones ".$exc->getMessage();
+            echo "Error dao al listar postulaciones por rut" . $exc->getMessage();
         }
         return $lista;
     }
@@ -94,10 +95,10 @@ class PostulacionDaoImp implements PostulacionDao{
     public function agregar($dto) {
         try {
             $pdo = new clasePDO();
-            $stmt= $pdo->prepare("INSERT INTO postulacion(rut, fecha_nacimiento,"
+            $stmt = $pdo->prepare("INSERT INTO postulacion(rut, fecha_nacimiento,"
                     . "sexo, telefono,email,direccion,comuna, educacion,experiencia_programacion,"
                     . "cantidad_anhos, modalidad, curso, fecha_postulacion) VALUES(?,?,?,?,?,?,?,?,?,?,?, now())");
-            
+
             $stmt->bindValue(1, $dto->getRut());
             $stmt->bindValue(2, $dto->getFechaNacimiento());
             $stmt->bindValue(3, $dto->getSexo());
@@ -111,42 +112,41 @@ class PostulacionDaoImp implements PostulacionDao{
             $stmt->bindValue(11, $dto->getModalidad());
             $stmt->bindValue(12, $dto->getCurso());
             $stmt->execute();
-            if($stmt->rowCount()>0)
+            if ($stmt->rowCount() > 0)
                 return TRUE;
-            $pdo=NULL;            
+            $pdo = NULL;
         } catch (Exception $exc) {
-            echo "Error dao al agregar ".$exc->getMessage();
+            echo "Error dao al agregar " . $exc->getMessage();
         }
         return FALSE;
     }
 
     public function eliminar($idPostulacion) {
-        
+
         try {
             $pdo = new clasePDO();
-            $stmt= $pdo->prepare("delete from postulacion where id=?");
+            $stmt = $pdo->prepare("delete from postulacion where id=?");
 
             $stmt->bindValue(1, $idPostulacion);
 
             $stmt->execute();
-            if($stmt->rowCount()>0)
+            if ($stmt->rowCount() > 0)
                 return TRUE;
-            $pdo=NULL;    
-            
+            $pdo = NULL;
         } catch (Exception $exc) {
-            echo "Error dao al eliminar ".$exc->getMessage();
+            echo "Error dao al eliminar " . $exc->getMessage();
         }
         return FALSE;
     }
 
     public function modificar($dto) {
-         try {
-            $pdo= new clasePDO();
-            $stmt= $pdo->prepare("update postulacion set fecha_nacimiento=?, "
-                    . "sexo=?, telefono=?, email=, direccion=?, comuna=?, "
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("update postulacion set fecha_nacimiento=?, "
+                    . "sexo=?, telefono=?, email=?, direccion=?, comuna=?, "
                     . "educacion=?, experiencia_programacion=?, "
-                    . "cantidad_anhos=?, modalidad=?, curso=? where id=?");
-            
+                    . "cantidad_anhos=?, modalidad=?, curso=?, estado=? where id=?");
+
             $stmt->bindValue(1, $dto->getFechaNacimiento());
             $stmt->bindValue(2, $dto->getSexo());
             $stmt->bindValue(3, $dto->getTelefono());
@@ -157,15 +157,16 @@ class PostulacionDaoImp implements PostulacionDao{
             $stmt->bindValue(8, $dto->getExperienciaProgamacion());
             $stmt->bindValue(9, $dto->getCantidadAhos());
             $stmt->bindValue(10, $dto->getModalidad());
-            $stmt->bindValue(11, $dto->getCurso());  
-            $stmt->bindValue(11, $dto->getId());  
+            $stmt->bindValue(11, $dto->getCurso());
+            $stmt->bindValue(12, $dto->getEstado());
+            $stmt->bindValue(13, $dto->getId());
 
             $stmt->execute();
-            if($stmt->rowCount()>0)
+            if ($stmt->rowCount() > 0)
                 return TRUE;
-            $pdo=NULL;                             
+            $pdo = NULL;
         } catch (Exception $exc) {
-            echo "Error dao al modificar ".$exc->getMessage();
+            echo "Error dao al modificar " . $exc->getMessage();
         }
         return FALSE;
     }
@@ -174,12 +175,12 @@ class PostulacionDaoImp implements PostulacionDao{
         try {
             $postulacion = new PostulacionDto();
             $pdo = new clasePDO();
-            $stmt= $pdo->prepare("select * from postulacion where id=?");
+            $stmt = $pdo->prepare("select * from postulacion where id=?");
             $stmt->bindValue(1, $id);
             $stmt->execute();
             $registro = $stmt->fetchAll();
             foreach ($registro as $value) {
-                
+
                 $usuarioDao = new UsuarioDaoImp();
                 $comunaDao = new ComunaDaoImp();
                 $educacionDao = new EducacionDaoImp();
@@ -199,23 +200,23 @@ class PostulacionDaoImp implements PostulacionDao{
                 $postulacion->setCantidadAhos($value["cantidad_anhos"]);
                 $postulacion->setModalidad($value["modalidad"]);
                 $postulacion->setCurso($value["curso"]);
-                
+                $postulacion->setFechaPostulacion($value["fecha_postulacion"]);
+                $postulacion->setEstado($value["estado"]);
             }
-            
-            $pdo=NULL;     
-            
+
+            $pdo = NULL;
         } catch (Exception $exc) {
-            echo "Error dao al buscar postulación ".$exc->getMessage();
+            echo "Error dao al buscar postulación " . $exc->getMessage();
         }
         return $postulacion;
     }
 
     public function buscarPorFecha($desde, $hasta) {
-       
+
         try {
             $lista = new ArrayObject();
             $pdo = new clasePDO();
-            $stmt= $pdo->prepare("select * from postulacion where fecha_postulacion BETWEEN CAST(? AS DATE) AND CAST(? AS DATE)");
+            $stmt = $pdo->prepare("select * from postulacion where fecha_postulacion BETWEEN CAST(? AS DATE) AND CAST(? AS DATE)");
             $stmt->bindValue(1, $desde);
             $stmt->bindValue(2, $hasta);
             $stmt->execute();
@@ -242,13 +243,13 @@ class PostulacionDaoImp implements PostulacionDao{
                 $postulacion->setModalidad($value["modalidad"]);
                 $postulacion->setCurso($value["curso"]);
                 $postulacion->setFechaPostulacion($value["fecha_postulacion"]);
+                $postulacion->setEstado($value["estado"]);
                 $lista->append($postulacion);
             }
-            
-            $pdo=NULL;     
-            
+
+            $pdo = NULL;
         } catch (Exception $exc) {
-            echo "Error dao al listar postulaciones por rango de fecha ".$exc->getMessage();
+            echo "Error dao al listar postulaciones por rango de fecha " . $exc->getMessage();
         }
         return $lista;
     }

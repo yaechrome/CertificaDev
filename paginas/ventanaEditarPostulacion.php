@@ -5,8 +5,7 @@
         <title></title>
     </head>
     <body>
-        <form action="agregarPostulacion.php" method="POST">
-
+        <form action="verFichaPostulante.php" method="POST">
             <table border="0">
                 <tbody>
                     <tr>
@@ -78,11 +77,14 @@
                                 <option>Php</option>
                             </select></td>
                     </tr>
+                    <tr>
+                        <td><input type="radio" name="Estado" value="Pendiente" />Pendiente</td>
+                        <td><input type="radio" name="Estado" value="Rechazar" />Rechazar</td>
+                        <td><input type="radio" name="Estado" value="Aprobar" />Aprobar</td>
+                        <td><input type="submit" value="Actualizar" name="btnActualizar" /></td>
+                    </tr>
                 </tbody>
-            </table>
-            <br>            
-            <input type="submit" value="Postular" name="btnPostular" />
+            </table>  
         </form>
     </body>
 </html>
-
