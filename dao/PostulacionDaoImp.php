@@ -5,12 +5,15 @@ include_once '../dto/PostulacionDto.php';
 include_once '../dto/ComunaDto.php';
 include_once '../dto/EducacionDto.php';
 include_once '../dto/UsuarioDto.php';
+include_once 'EducacionDaoImp.php';
+include_once 'ComunaDaoImp.php';
+include_once 'UsuarioDaoImp.php';
 include_once 'BaseDao.php';
 include_once 'PostulacionDao.php';
 
 class PostulacionDaoImp implements PostulacionDao {
 
-    public function listar() {
+    public static function listar() {
         try {
             $lista = new ArrayObject();
             $pdo = new clasePDO();

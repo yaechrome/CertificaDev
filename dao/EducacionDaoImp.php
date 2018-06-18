@@ -1,4 +1,5 @@
 <?php
+include_once 'BaseDao.php';
 include_once '../bd/ClasePDO.php';
 
 class EducacionDaoImp implements BaseDao{

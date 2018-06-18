@@ -45,7 +45,7 @@ class UsuarioDaoImp implements UsuarioDao{
         return FALSE;
     }
 
-    public function listar() {
+    public static function listar() {
         $lista = new ArrayObject();
         try {
             $pdo= new clasePDO();
@@ -100,13 +100,12 @@ class UsuarioDaoImp implements UsuarioDao{
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $value) {
                 $usuario = new UsuarioDto();
-                $dto->setRut($value["rut"]);
-                $dto->setNombre($value["nombre"]);
-                $dto->setApellidoPaterno($value["apellido_paterno"]);
-                $dto->setApellidoMaterno($value["apellido_materno"]);
-                $dto->setContrasena($value["contrasena"]);
-                $dto->setPerfil($value["perfil"]);
-                $usuario = $dto;                
+                $usuario->setRut($value["rut"]);
+                $usuario->setNombre($value["nombre"]);
+                $usuario->setApellidoPaterno($value["apellido_paterno"]);
+                $usuario->setApellidoMaterno($value["apellido_materno"]);
+                $usuario->setContrasena($value["contrasena"]);
+                $usuario->setPerfil($value["perfil"]);            
             }
             $pdo=NULL;
         } catch (Exception $exc) {
