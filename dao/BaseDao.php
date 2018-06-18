@@ -2,7 +2,7 @@
 
 interface BaseDao {
 
-    public function listar();
+    public static function listar();
     
     public function buscarPorClavePrimaria($id);
 }

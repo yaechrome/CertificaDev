@@ -3,7 +3,7 @@ include_once '../bd/ClasePDO.php';
 
 class EducacionDaoImp implements BaseDao{
     
-    public function listar() {
+    public static function listar() {
         try {
             $lista = new ArrayObject();
             $pdo = new clasePDO();
@@ -12,11 +12,7 @@ class EducacionDaoImp implements BaseDao{
             
             $postulaciones = $stmt->fetchAll();
             foreach ($postulaciones as $value) {
-                $educacion = new EducacionDto();
-                $educacion->setId($value["id"]);
-                $educacion->setDescripcion($value["descripcion"]);
-
-                $lista->append($educacion);
+                $lista->append($value["descripcion"]);
             }
             
             $pdo=NULL;     

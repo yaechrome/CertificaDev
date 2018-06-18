@@ -11,29 +11,39 @@
                 <tbody>
                     <tr>
                         <td>Rut</td>
-                        <td><input type="text" name="txtRut" value="" /></td>
+                        <td><input type="text" name="txtRut" value="" disabled="true"/></td>
                         <td>Direccion</td>
                         <td><input type="text" name="txtDireccion" value="" /></td>
                     </tr>
                     <tr>
                         <td>Nombre</td>
-                        <td><input type="text" name="txtNombre" value="" /></td>
+                        <td><input type="text" name="txtNombre" value="" disabled="true"/></td>
                         <td>Comuna</td>
-                        <td><select name="cmbComuna">
-                                <option></option>
-                            </select></td>
+                        <td><select name="cmbComunas">
+                                <?php
+                                include_once '../dao/ComunaDaoImp.php';
+                                foreach (ComunaDaoImp::listar() as $value) { ?>
+                                    <option><?php echo $value; ?></option>                                
+                                <?php } ?>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Apellido Paterno</td>
-                        <td><input type="text" name="txtApellidoPaterno" value="" /></td>
+                        <td><input type="text" name="txtApellidoPaterno" value="" disabled="true"/></td>
                         <td>Educacion</td>
                         <td><select name="cmbEducacion">
-                                <option></option>
-                            </select></td>
+                                <?php
+                                include_once '../dao/EducacionDaoImp.php';
+                                foreach (EducacionDaoImp::listar() as $value) { ?>
+                                    <option><?php echo $value; ?></option>                                
+                                <?php } ?>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Apellido Materno</td>
-                        <td><input type="text" name="txtApellidoMaterno" value="" /></td>
+                        <td><input type="text" name="txtApellidoMaterno" value="" disabled="true"/></td>
                         <td>
                             Experiencia laboral en el area de programacion
                         </td>
@@ -43,12 +53,12 @@
                     </tr>
                     <tr>
                         <td>Fecha Nacimiento</td>
-                        <td><input type="Date" name="txtFechaNacimiento" value="" /></td>
+                        <td><input type="Date"  name="txtFechaNacimiento" value="" /></td>
                         <td>
                             cantidad años 
                         </td>
                         <td>
-                            <input type="number" name="txtAños" value="" />
+                            <input type="number" name="txtAños" value="18" />
                         </td>
                     </tr>
                     <tr>

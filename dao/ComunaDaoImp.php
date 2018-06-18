@@ -1,9 +1,11 @@
 <?php
 include_once '../bd/ClasePDO.php';
+include_once '../dto/ComunaDto.php';
+include_once 'BaseDao.php';
 
 class ComunaDaoImp implements BaseDao{
     
-    public function listar() {
+    public static function listar() {
         $lista = new ArrayObject();
         try {
             $pdo= new clasePDO();
@@ -11,10 +13,7 @@ class ComunaDaoImp implements BaseDao{
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $value) {
-                $dto = new ComunaDto();
-                $dto->setId($value["id"]);
-                $dto->setDescripcion($value["descripcion"]);
-                $lista->append($dto);                
+                $lista->append($value["descripcion"]);                
             }
             $pdo=NULL;
         } catch (Exception $exc) {
