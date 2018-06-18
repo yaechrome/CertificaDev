@@ -19,7 +19,7 @@
                         <td>Nombre</td>
                         <td><input type="text" name="txtNombre" value="" disabled="true"/></td>
                         <td>Comuna</td>
-                        <td><select name="cmbComunas">
+                        <td><select name="cmbComuna">
                                 <?php
                                 include_once '../dao/ComunaDaoImp.php';
                                 foreach (ComunaDaoImp::listar() as $value) { ?>

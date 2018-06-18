@@ -9,8 +9,8 @@ include_once '../dao/PostulacionDaoImp.php';
 $comunaDao = new ComunaDaoImp();
 $_POST["cmbComunas"];
 $_POST["cmbEducacion"];
-//$comunas = $comunaDao->listar();
-//session_start();
-//$_SESSION["listaComunas"]=$comunas;
+$direccion = trim($_POST["txDireccion"]);
+$comuna =trim($_POST["cmbComuna"]);
+
 
 include_once 'ventanaAgregarPostulacion.php';
