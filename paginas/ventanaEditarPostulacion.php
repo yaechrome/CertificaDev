@@ -2,10 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Editar Postulacion</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </head>
     <body>
-        <form action="verFichaPostulante.php" method="POST">
+        <form action="editarPostulacion.php" method="POST">
+            <div id="sel">
+                
             <table border="0">
                 <tbody>
                     <tr>
@@ -19,25 +22,35 @@
                         <td><input type="text" name="txtNombre" value="" /></td>
                         <td>Comuna</td>
                         <td><select name="cmbComuna">
-                                <option></option>
-                            </select></td>
+                                <?php
+                                include_once '../dao/ComunaDaoImp.php';
+                                foreach (ComunaDaoImp::listar() as $value) { ?>
+                                    <option><?php echo $value; ?></option>                                
+                                <?php } ?>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Apellido Paterno</td>
                         <td><input type="text" name="txtApellidoPaterno" value="" /></td>
                         <td>Educacion</td>
                         <td><select name="cmbEducacion">
-                                <option></option>
-                            </select></td>
+                                <?php
+                                include_once '../dao/EducacionDaoImp.php';
+                                foreach (EducacionDaoImp::listar() as $value) { ?>
+                                    <option><?php echo $value; ?></option>                                
+                                <?php } ?>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Apellido Materno</td>
                         <td><input type="text" name="txtApellidoMaterno" value="" /></td>
                         <td>
-                            Experiencia laboral en el area de programacion
+                            Experiencia laboral en programacion
                         </td>
                         <td>
-                            <input type="checkbox" name="chkExperiencia" value="ON" /> 
+                            <input type="checkbox" name="chkExperiencia" value="ON" v-on:Click="cambiar"/> 
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +60,7 @@
                             cantidad años 
                         </td>
                         <td>
-                            <input type="number" name="txtAños" value="" />
+                            <input type="number" name="txtAños" value="" v-bind:disabled="estado"/>
                         </td>
                     </tr>
                     <tr>
@@ -85,6 +98,20 @@
                     </tr>
                 </tbody>
             </table>  
+            </div>
         </form>
     </body>
 </html>
+<script>
+    var vm = new Vue({
+    el: '#sel',
+    data: {
+        estado: true
+    },
+    methods: {
+        cambiar: function(){
+            this.estado= !this.estado;
+        }
+    }
+});
+</script>
