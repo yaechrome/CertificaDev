@@ -26,6 +26,10 @@ $modalidad = trim($_POST['cmbModalidad']);
 $email = trim($_POST['txtEmail']);
 $curso = trim($_POST['cmbCurso']);
 
+if($años==null){
+    $años = 0;
+}
+
 if($direccion == "" || $fechaNacimiento == "" ||  $telefono == "" || $email == ""){
     echo "<script> alert('Debe ingresar todos los datos') </script>";
 }else{

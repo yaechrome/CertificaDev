@@ -21,6 +21,9 @@ $email = trim($_POST['txtEmail']);
 $curso = trim($_POST['cmbCurso']);
 $estado = trim($_POST['Estado']);
 
+if($años==null){
+    $años = 0;
+}
 
 $dao = new PostulacionDaoImp();
 $id = $_GET['id'];

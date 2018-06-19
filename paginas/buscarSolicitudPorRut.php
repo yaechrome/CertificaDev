@@ -24,7 +24,6 @@ if($_SESSION['perfil']=='Postulante'){
     $_SESSION["estadoUltima"]= $estadoUltima;
     include_once './ventanaBuscarPorRut.php';
 }else{
-    
 
         $lista = $dao->listarPorRut($rut);
 

@@ -58,7 +58,7 @@
                             <td><?php echo $dto->getUsuario()->getRut(); ?></td>
                             <td><?php echo $dto->getUsuario()->getNombre().' '.$dto->getUsuario()->getApellidoPaterno().' '.$dto->getUsuario()->getApellidoMaterno(); ?></td>
                             <td><?php echo $dto->getEstado(); ?></td>
-                            <td><a href="ventanaEditarPostulacion.php">Editar</a></td>                          
+                            <td><a href="ventanaEditarPostulacion.php?id=<?php echo $dto->getId(); ?>">Editar</a></td>                          
                         </tr>
                     <?php } ?>
                 </tbody>
