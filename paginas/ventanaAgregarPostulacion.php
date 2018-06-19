@@ -10,10 +10,29 @@ $postulante = $_SESSION["postulante"];
         <meta charset="UTF-8">
         <title>Crear Postulación</title>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            window.onload = function () {
+                var vm = new Vue({
+                    el: '#sel',
+                    data: {
+                        estado: true,
+                        años: 0
+                    },
+                    methods: {
+                        cambiar: function () {
+                            this.estado = !this.estado;
+                            if(this.estado){
+                                this.años = 0;
+                            }
+                        }
+                    }
+                });
+            };
+        </script>
     </head>
     <body>
         <form action="agregarPostulacion.php" method="POST">
-        <div id='SEL'>
+        <div id='sel'>
             <table border="0">
                 <tbody>
                     
@@ -32,7 +51,7 @@ $postulante = $_SESSION["postulante"];
                                 <?php
                                 include_once '../dao/ComunaDaoImp.php';
                                 foreach (ComunaDaoImp::listar() as $value) { ?>
-                                    <option><?php echo $value; ?></option>                                
+                                    <option><?php echo $value->getDescripcion(); ?></option>                                
                                 <?php } ?>
                             </select>
                         </td>
@@ -45,7 +64,7 @@ $postulante = $_SESSION["postulante"];
                                 <?php
                                 include_once '../dao/EducacionDaoImp.php';
                                 foreach (EducacionDaoImp::listar() as $value) { ?>
-                                    <option><?php echo $value; ?></option>                                
+                                    <option><?php echo $value->getDescripcion();; ?></option>                                
                                 <?php } ?>
                             </select>
                         </td>
@@ -67,7 +86,7 @@ $postulante = $_SESSION["postulante"];
                             cantidad años 
                         </td>
                         <td>
-                            <input type="number" name="txtAhos" value="18" />
+                            <input type="number" name="txtAhos" v-model="años" v-bind:disabled="estado" />
                         </td>
                     </tr>
                     <tr>
@@ -110,18 +129,5 @@ $postulante = $_SESSION["postulante"];
     </body>
     
 </html>
-<script>
-    var vm = new Vue({
-        el: '#sel',
-        data: {
-            estado: true
-        },
-        methods: {
-            cambiar: function(){
-                this.estado= !this.estado;
-            }
-        }
-    });
-    
-</script>
+
 
