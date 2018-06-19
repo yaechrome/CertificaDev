@@ -1,6 +1,6 @@
 <?php
 include_once '../dto/UsuarioDto.php';
-session_start();
+
 $postulante = $_SESSION["postulante"];
 
 ?>
@@ -39,7 +39,7 @@ $postulante = $_SESSION["postulante"];
                     </tr>
                     <tr>
                         <td>Apellido Paterno</td>
-                        <td><input type="text" name="txtApellidoPaterno" value=<?php echo $_SESSION['apPaterno']?> disabled="true"/></td>
+                        <td><input type="text" name="txtApellidoPaterno" value="<?= $postulante->getApellidoPaterno() ?>" disabled="true"/></td>
                         <td>Educacion</td>
                         <td><select name="cmbEducacion">
                                 <?php
@@ -52,7 +52,7 @@ $postulante = $_SESSION["postulante"];
                     </tr>
                     <tr>
                         <td>Apellido Materno</td>
-                        <td><input type="text" name="txtApellidoMaterno" value=<?php echo $_SESSION['apMaterno']?>  disabled="true"/></td>
+                        <td><input type="text" name="txtApellidoMaterno" value="<?= $postulante->getApellidoMaterno() ?>"  disabled="true"/></td>
                         <td>
                             Experiencia laboral en  programacion
                         </td>
