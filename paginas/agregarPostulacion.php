@@ -53,4 +53,3 @@ if($direccion == "" || $fechaNacimiento == "" ||  $telefono == "" || $email == "
 //        .' cantidad '.$años.' sexo '.$sexo.' email '.$email.' curso '.$curso;
 
 
-include_once '../login/panel-control.php.php';

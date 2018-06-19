@@ -10,12 +10,22 @@ session_start();
 
 $postDao = new PostulacionDaoImp();
 $postulacion = new PostulacionDto();
-
+$user = new UsuarioDto();
 
 if($_SESSION["perfil"]=="Postulante"){
     $_SESSION["postulante"] = $_SESSION["usuario"];
-    
-    include_once './ventanaAgregarPostulacion.php';
+    $user = $_SESSION["postulante"];
+    $ultima = $postDao->BuscarUltimaSolicitud($user->getRut());
+    if($ultima== null){
+         include_once './ventanaAgregarPostulacion.php';
+    }else{
+        if($ultima->getEstado()== 'Pendiente'){
+            echo "<script> alert('Ya existe una postulacion pendiente') </script>";
+            include_once '../login/panel-control.php';
+        }else{
+            include_once './ventanaAgregarPostulacion.php';
+        }
+    }
 }else{
     
     echo 'hola';

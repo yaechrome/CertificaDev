@@ -44,9 +44,10 @@ if ($result->num_rows > 0) {
     $_SESSION['start'] = time();
     $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
 
-    echo $_SESSION['nombre'].$_SESSION['apPaterno'];
+    echo $_SESSION['nombre'].' '.$_SESSION['apPaterno'];
     //echo "<br><br><a href=panel-control.php>Menu</a>"; 
-    header("location:panel-control.php"); 
+    //header("location:panel-control.php"); 
+    include_once '../login/panel-control.php';
  } else { 
    echo "RUT o Password estan incorrectos.";
 
