@@ -7,9 +7,10 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Registrarse</title>
     </head>
     <body>
+        <h1>Registrarse</h1>
         <form action="agregarUsuario.php" method="POST">
             <table border="0">
                 <tbody>
@@ -39,7 +40,10 @@ and open the template in the editor.
                     </tr>
                 </tbody>
             </table>
+            <br>
             <input type="submit" value="Registrar" name="btnRegistrar" />
         </form>
+        <br>
+        <a href="../login/Login.html">Volver</a>
     </body>
 </html>
