@@ -53,4 +53,3 @@ if ($result->num_rows > 0) {
    echo "<br><a href='login.html'>Volver a Intentarlo</a>";
  }
  mysqli_close($conexion); 
- ?>

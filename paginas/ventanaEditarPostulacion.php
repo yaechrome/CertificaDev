@@ -36,11 +36,15 @@ function htmlIsOn($algo) {
                 var vm = new Vue({
                     el: '#sel',
                     data: {
-                        estado: <?= jsBoolean(!$postulacion->getExperienciaProgramacion()) ?>
+                        estado: <?= jsBoolean(!$postulacion->getExperienciaProgramacion()) ?>,
+                        años: <?= $postulacion->getCantidadAhos() ?>
                     },
                     methods: {
                         cambiar: function () {
                             this.estado = !this.estado;
+                            if(this.estado){
+                                this.años = 0;
+                            }
                         }
                     }
                 });
@@ -105,7 +109,7 @@ function htmlIsOn($algo) {
                                 cantidad años 
                             </td>
                             <td>
-                                <input type="number" name="txtAños" value="<?= $postulacion->getCantidadAhos() ?>" v-bind:disabled="estado"/>
+                                <input type="number" name="txtAños" v-model="años" v-bind:disabled="estado"/>
                             </td>
                         </tr>
                         <tr>
