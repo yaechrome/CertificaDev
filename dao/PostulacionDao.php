@@ -11,5 +11,7 @@ interface PostulacionDao extends BaseDao {
     public function eliminar($idPostulacion);
     
     public function buscarPorFecha($desde, $hasta);
+    
+    public function BuscarUltimaSolicitud($rut);
 
 }

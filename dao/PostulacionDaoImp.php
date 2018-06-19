@@ -257,4 +257,8 @@ class PostulacionDaoImp implements PostulacionDao {
         return $lista;
     }
 
+    public function BuscarUltimaSolicitud($rut) {
+        
+    }
+
 }

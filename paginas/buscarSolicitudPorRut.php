@@ -1,13 +1,25 @@
 <?php
-
+session_start();
 include_once '../dao/PostulacionDaoImp.php';
 
-$rut = $_POST["txtRut"];
 $dao = new PostulacionDaoImp();
-$lista = $dao->listarPorRut($rut);
-session_start();
-$_SESSION["listaDesplegar"]= $lista;
+$rut = $_POST["txtRut"];
+if($_SESSION['perfil']=='Postulante'){
+    
+    $postulacion = 'hola';//$dao->BuscarUltimaSolicitud($rut);
 
-include_once 'ventanaBuscarSolicitud.php';
+    $_SESSION["postulacion"]= $postulacion;
+    
+    include_once './ventanaBuscarPorRut.php';
+}else{
+    
+
+        $lista = $dao->listarPorRut($rut);
+
+    $_SESSION["listaDesplegar"]= $lista;
+
+    include_once 'ventanaBuscarSolicitud.php';
+}
+
         
 

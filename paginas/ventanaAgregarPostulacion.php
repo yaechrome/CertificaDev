@@ -2,28 +2,30 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Crear Postulación</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </head>
     <body>
         <form action="agregarPostulacion.php" method="POST">
-        <?php
-        if(isset($_SESSION["usuario"])){ ?>
+        <div id='SEL'>
+            <?php 
+            session_start();
+            ?>
             <table border="0">
                 <tbody>
-                    <?php
-                    include_once '../dto/UsuarioDto.php';
-                    ?>
+                    
                     <tr>
                         <td>Rut</td>
-                        <td><input type="text" name="txtRut" value="<?php echo $usuario->getRut(); ?>" disabled="true"/></td>
+                        <td><input type="text" name="txtRut" value=<?php echo $_SESSION['username']?> disabled="true"/></td>
                         <td>Direccion</td>
-                        <td><input type="text" name="txtDireccion" value="" /></td>
+                        <td><input type="text" name="txtDireccion" value="" v-on:/></td>
                     </tr>
+                    
                     <tr>
                         <td>Nombre</td>
-                        <td><input type="text" name="txtNombre" value="" disabled="true"/></td>
+                        <td><input type="text" name="txtNombre" value=<?php echo $_SESSION['nombre']?>  disabled="true"/></td>
                         <td>Comuna</td>
-                        <td><select name="cmbComuna">
+                        <td><select name="cmbComuna" >
                                 <?php
                                 include_once '../dao/ComunaDaoImp.php';
                                 foreach (ComunaDaoImp::listar() as $value) { ?>
@@ -34,7 +36,7 @@
                     </tr>
                     <tr>
                         <td>Apellido Paterno</td>
-                        <td><input type="text" name="txtApellidoPaterno" value="" disabled="true"/></td>
+                        <td><input type="text" name="txtApellidoPaterno" value=<?php echo $_SESSION['apPaterno']?> disabled="true"/></td>
                         <td>Educacion</td>
                         <td><select name="cmbEducacion">
                                 <?php
@@ -47,12 +49,12 @@
                     </tr>
                     <tr>
                         <td>Apellido Materno</td>
-                        <td><input type="text" name="txtApellidoMaterno" value="" disabled="true"/></td>
+                        <td><input type="text" name="txtApellidoMaterno" value=<?php echo $_SESSION['apMaterno']?>  disabled="true"/></td>
                         <td>
-                            Experiencia laboral en el area de programacion
+                            Experiencia laboral en  programacion
                         </td>
                         <td>
-                            <input type="checkbox" name="chkExperiencia" value="ON" /> 
+                            <input type="checkbox" name="chkExperiencia" value="ON"  v-on:Click="cambiar"/> 
                         </td>
                     </tr>
                     <tr>
@@ -96,10 +98,25 @@
             </table>
             <br>            
             <input type="submit" value="Postular" name="btnPostular" />
+        </div>
         </form>
-        <?php         
-        }      
-        ?>
+        
     </body>
+    <a href=../login/panel-control.php>Volver </a>
+    <a href=../login/logout.php>Cerrar Sesion X </a>
 </html>
+<script>
+    var vm = new Vue({
+        el: '#sel',
+        data: {
+            estado: true
+        },
+        methods: {
+            cambiar: function(){
+                this.estado= !this.estado;
+            }
+        }
+    });
+    
+</script>
 

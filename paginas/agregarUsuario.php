@@ -34,12 +34,15 @@ if($rut== "" || $nombre== "" || $apellidoP== "" || $apellidoM== "" || $contrasen
             
             if($dao->agregar($usuario)){
                 $mensaje= "Usuario registrado con exito";
+                echo "<script> alert('$mensaje') </script>";
             }else{
                 $mensaje= "Error al intentar registrar usuario";
+                echo "<script> alert('$mensaje') </script>";
             }
         }
     }
     
 }
-echo "<script> alert('$mensaje') </script>";
+
+header("location:../login/Login.html"); 
 include_once 'ventanaAgregarUsuario.php';
