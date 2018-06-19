@@ -28,6 +28,6 @@ if($_SESSION["perfil"]=="Postulante"){
     }
 }else{
     
-    echo 'hola';
+    header("location:ventanaBuscarPostulante.php"); 
 
 }
