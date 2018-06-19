@@ -3,6 +3,21 @@ include_once '../dto/UsuarioDto.php';
 
 $postulante = $_SESSION["postulante"];
 
+function jsBoolean($algo) {
+    return $algo ? "true" : "false";
+}
+
+function htmlChecked($algo) {
+    return $algo ? "checked" : "";
+}
+
+function htmlSelected($algo) {
+    return $algo ? "selected" : "";
+}
+
+function htmlIsOn($algo) {
+    return $algo ? "1" : "0";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,10 +64,11 @@ $postulante = $_SESSION["postulante"];
                         <td>Comuna</td>
                         <td><select name="cmbComuna" >
                                 <?php
-                                include_once '../dao/ComunaDaoImp.php';
-                                foreach (ComunaDaoImp::listar() as $value) { ?>
-                                    <option><?php echo $value->getDescripcion(); ?></option>                                
-                                <?php } ?>
+                                    include_once '../dao/ComunaDaoImp.php';
+                                    foreach (ComunaDaoImp::listar() as $value) {
+                                        ?>
+                                    <option <?= htmlSelected($postulacion->getComuna() == $value) ?> value="<?= $value->getId() ?>"><?= $value->getDescripcion() ?></option>                                
+                                    <?php } ?>
                             </select>
                         </td>
                     </tr>
@@ -61,11 +77,12 @@ $postulante = $_SESSION["postulante"];
                         <td><input type="text" name="txtApellidoPaterno" value="<?= $postulante->getApellidoPaterno() ?>" disabled="true"/></td>
                         <td>Educacion</td>
                         <td><select name="cmbEducacion">
-                                <?php
-                                include_once '../dao/EducacionDaoImp.php';
-                                foreach (EducacionDaoImp::listar() as $value) { ?>
-                                    <option><?php echo $value->getDescripcion();; ?></option>                                
-                                <?php } ?>
+                                 <?php
+                                    include_once '../dao/EducacionDaoImp.php';
+                                    foreach (EducacionDaoImp::listar() as $value) {
+                                        ?>
+                                    <option <?= htmlSelected($postulacion->getEducacion() == $value) ?> value="<?= $value->getId() ?>"> <?php echo $value->getDescripcion(); ?></option>                                
+                                    <?php } ?>
                             </select>
                         </td>
                     </tr>
@@ -91,7 +108,8 @@ $postulante = $_SESSION["postulante"];
                     </tr>
                     <tr>
                         <td>Sexo</td>
-                        <td>M<input type="radio" name="Sexo" value="M" checked="checked" /> F<input type="radio" name="Sexo" value="F" /></td>
+                        <td>M<input type="radio" name="Sexo" value="M" checked="checked" /> 
+                            F<input type="radio" name="Sexo" value="F" /></td>
                         <td>
                             Modalidad y curso al que postula
                         </td>
@@ -102,8 +120,8 @@ $postulante = $_SESSION["postulante"];
                         <td><input type="text" name="txtTelefono" value="" /></td>
                         <td>Modalidad</td>
                         <td><select name="cmbModalidad">
-                                <option>Diurno</option>
-                                <option>Vespertino</option>
+                                <option <?= htmlSelected($postulacion->getModalidad() == "Diurno") ?>>Diurno</option>
+                                <option <?= htmlSelected($postulacion->getModalidad() == "Vespertino") ?>>Vespertino</option>
                             </select></td>
                     </tr>
                     <tr>
@@ -111,9 +129,9 @@ $postulante = $_SESSION["postulante"];
                         <td><input type="text" name="txtEmail" value="" /></td>
                         <td>Curso</td>
                         <td><select name="cmbCurso">
-                                <option>Java</option>
-                                <option>.Net</option>
-                                <option>Php</option>
+                                <option <?= htmlSelected($postulacion->getCurso() == "Java") ?>>Java</option>
+                                <option <?= htmlSelected($postulacion->getCurso() == ".Net") ?>>.Net</option>
+                                <option <?= htmlSelected($postulacion->getCurso() == "Php") ?>>Php</option>
                             </select></td>
                     </tr>
                 </tbody>

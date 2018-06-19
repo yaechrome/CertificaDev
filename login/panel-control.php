@@ -37,14 +37,14 @@ exit;
     
   <?php 
     if($_SESSION['perfil']=='Postulante'){?>
-  <p><a href="../paginas/agregarPostulacion.php" >Crear Postulacion</a></p>
+    <p><a href="../paginas/validarPostulante.php" >Crear Postulacion</a></p>
   <p><a href="../paginas/ventanaBuscarPorRut.php" >Estado de Postulacion</a></p>
 
 
 <?php
 }else{
   ?>  
-  <p><a href="../paginas/ventanaBuscarPorRut.php" >Crear Postulacion</a></p>
+  <p><a href="../paginas/validarPostulante.php" >Crear Postulacion</a></p>
   <p><a href="../paginas/ventanaBuscarSolicitud.php" >Buscar Postulacion</a></p>
 
 <?php

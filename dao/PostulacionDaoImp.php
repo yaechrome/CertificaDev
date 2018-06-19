@@ -102,7 +102,7 @@ class PostulacionDaoImp implements PostulacionDao {
                     . "sexo, telefono,email,direccion,comuna, educacion,experiencia_programacion,"
                     . "cantidad_anhos, modalidad, curso, fecha_postulacion) VALUES(?,?,?,?,?,?,?,?,?,?,?, now())");
 
-            $stmt->bindValue(1, $dto->getRut());
+            $stmt->bindValue(1, $dto->getUsuario()->getRut());
             $stmt->bindValue(2, $dto->getFechaNacimiento());
             $stmt->bindValue(3, $dto->getSexo());
             $stmt->bindValue(4, $dto->getTelefono());

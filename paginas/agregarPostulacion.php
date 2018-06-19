@@ -6,39 +6,51 @@ include_once '../dto/UsuarioDto.php';
 include_once '../dao/UsuarioDaoImp.php';
 include_once '../dao/PostulacionDaoImp.php';
 
-$userDao = new UsuarioDaoImp();
 session_start();
-
+$user = new UsuarioDto();
+$userDao = new UsuarioDaoImp();
 $postDao = new PostulacionDaoImp();
 $postulacion = new PostulacionDto();
 
-if($_SESSION["perfil"]=="Postulante"){
-    $_SESSION["postulante"] = $_SESSION["usuario"];
-    
-    include_once './ventanaAgregarPostulacion.php';
-}else{
-    
+$user = $_SESSION["postulante"];
 
+$direccion = trim($_POST['txtDireccion']);
+$comuna = trim($_POST['cmbComuna']);
+$educacion = trim($_POST['cmbEducacion']);
+$experiencia = trim($_POST['chkExperiencia']) != "";
+$fechaNacimiento = trim($_POST['txtFechaNacimiento']);
+$años = trim($_POST['txtAhos']);
+$sexo = trim($_POST['Sexo']);
+$telefono = trim($_POST['txtTelefono']);
+$modalidad = trim($_POST['cmbModalidad']);
+$email = trim($_POST['txtEmail']);
+$curso = trim($_POST['cmbCurso']);
+
+if($direccion == "" || $fechaNacimiento == "" ||  $telefono == "" || $email == ""){
+    echo "<script> alert('Debe ingresar todos los datos') </script>";
+}else{
+    $postulacion->setDireccion($direccion);
+    $postulacion->setUsuario($user);
+    $postulacion->setComuna($comuna);
+    $postulacion->setEducacion($educacion);
+    $postulacion->setExperienciaProgramacion($experiencia);
+    $postulacion->setFechaNacimiento($fechaNacimiento);
+    $postulacion->setCantidadAhos($años);
+    $postulacion->setSexo($sexo);
+    $postulacion->setTelefono($telefono);
+    $postulacion->setModalidad($modalidad);
+    $postulacion->setEmail($email);
+    $postulacion->setCurso($curso);
+
+    if($postDao->agregar($postulacion)){
+        echo "<script> alert('Postulacion ingresada con exito') </script>";
+    }else{
+        echo "<script> alert('Debe ingresar todos los datos') </script>";
+    }
 }
 
+//echo 'dir '.$direccion.' comuna '.$comuna.' $educacion '.$educacion.' experiencia '.$experiencia.' fecha nac '.$fechaNacimiento
+//        .' cantidad '.$años.' sexo '.$sexo.' email '.$email.' curso '.$curso;
 
 
-
-//$comunaDao = new ComunaDaoImp();
-//$_POST["cmbComunas"];
-//$_POST["cmbEducacion"];
-
-
-//$direccion = trim($_POST["txDireccion"]);
-//$comuna = trim($_POST["cmbComuna"]);
-//$educacion = trim($_POST["cmbEducacion"]);
-//$experiencia = trim($_POST["chkExperiencia"]);
-//$fecha_nacimiento = trim($_POST["txtFechaNacimiento"]);
-//$cantidad = trim($_POST["txtAhos"]);
-//$sexo = trim($_POST["sexo"]);
-//$email = trim($_POST["txtEmail"]);
-//$curso = trim($_POST["cmbCurso"]);
-//
-////echo 'dir '.$direccion.' comuna '.$comuna.' $educacion '.$educacion.' experiencia '.$experiencia.' fecha nac '.$fecha_nacimiento
-////        .' cantidad '.$cantidad.' sexo '.$sexo.' email '.$email.' curso '.$curso;
-//include_once 'ventanaAgregarPostulacion.php';
+include_once '../login/panel-control.php.php';
