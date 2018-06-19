@@ -11,9 +11,13 @@ class EducacionDaoImp implements BaseDao{
             $stmt= $pdo->prepare("select * from educacion");
             $stmt->execute();
             
-            $postulaciones = $stmt->fetchAll();
-            foreach ($postulaciones as $value) {
-                $lista->append($value["descripcion"]);
+            $educaciones= $stmt->fetchAll();
+            foreach ($educaciones as $value) {
+                $educacion = new EducacionDto();
+                $educacion->setId($value["id"]);
+                $educacion->setDescripcion($value["descripcion"]);
+
+                $lista->append($educacion);
             }
             
             $pdo=NULL;     

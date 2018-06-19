@@ -14,7 +14,10 @@ class ComunaDaoImp implements ComunaDao{
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $value) {
-                $lista->append($value["descripcion"]);                
+                $dto = new ComunaDto();
+                $dto->setId($value["id"]);
+                $dto->setDescripcion($value["descripcion"]);
+                $lista->append($dto);
             }
             $pdo=NULL;
         } catch (Exception $exc) {

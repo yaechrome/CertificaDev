@@ -20,11 +20,10 @@ function htmlSelected($algo) {
     return $algo ? "selected" : "";
 }
 
-function debug($var) {
-    highlight_string("<?php\n\$data =\n" . var_export($var, true) . ";\n?>");
+function htmlIsOn($algo) {
+    return $algo ? "1" : "0";
 }
 
-debug($postulacion)
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +48,7 @@ debug($postulacion)
         </script>
     </head>
     <body>
-        <form action="editarPostulacion.php" method="POST">
+        <form action="editarPostulacion.php?id=<?= $id ?>" method="POST">
             <div id="sel">
 
                 <table>
@@ -69,7 +68,7 @@ debug($postulacion)
                                     include_once '../dao/ComunaDaoImp.php';
                                     foreach (ComunaDaoImp::listar() as $value) {
                                         ?>
-                                        <option><?php echo $value; ?></option>                                
+                                    <option <?= htmlSelected($postulacion->getComuna() == $value) ?> value="<?= $value->getId() ?>"><?= $value->getDescripcion() ?></option>                                
                                     <?php } ?>
                                 </select>
                             </td>
@@ -83,7 +82,7 @@ debug($postulacion)
                                     include_once '../dao/EducacionDaoImp.php';
                                     foreach (EducacionDaoImp::listar() as $value) {
                                         ?>
-                                        <option><?php echo $value; ?></option>                                
+                                    <option <?= htmlSelected($postulacion->getEducacion() == $value) ?> value="<?= $value->getId() ?>"> <?php echo $value->getDescripcion(); ?></option>                                
                                     <?php } ?>
                                 </select>
                             </td>
@@ -95,7 +94,7 @@ debug($postulacion)
                                 Experiencia laboral en programacion
                             </td>
                             <td>
-                                <input type="checkbox" name="chkExperiencia" <?= htmlChecked($postulacion->getExperienciaProgramacion()) ?> v-on:Click="cambiar"/> 
+                                <input type="checkbox" name="chkExperiencia" <?= htmlChecked($postulacion->getExperienciaProgramacion()) ?> value="" v-on:Click="cambiar"/> 
                             </td>
                             
                         </tr>
