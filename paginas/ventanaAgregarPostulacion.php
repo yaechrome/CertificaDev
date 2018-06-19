@@ -1,4 +1,5 @@
 <?php
+include_once '../dto/UsuarioDto.php';
 session_start();
 $postulante = $_SESSION["postulante"];
 
@@ -13,22 +14,19 @@ $postulante = $_SESSION["postulante"];
     <body>
         <form action="agregarPostulacion.php" method="POST">
         <div id='SEL'>
-            <?php 
-            session_start();
-            ?>
             <table border="0">
                 <tbody>
                     
                     <tr>
                         <td>Rut</td>
-                        <td><input type="text" name="txtRut" value=<?php echo $_SESSION['username']?> disabled="true"/></td>
+                        <td><input type="text" name="txtRut" value="<?= $postulante->getRut() ?>" disabled="true"/></td>
                         <td>Direccion</td>
                         <td><input type="text" name="txtDireccion" value="" v-on:/></td>
                     </tr>
                     
                     <tr>
                         <td>Nombre</td>
-                        <td><input type="text" name="txtNombre" value=<?php echo $_SESSION['nombre']?>  disabled="true"/></td>
+                        <td><input type="text" name="txtNombre" value="<?= $postulante->getNombre() ?>"  disabled="true"/></td>
                         <td>Comuna</td>
                         <td><select name="cmbComuna" >
                                 <?php

@@ -12,10 +12,10 @@ session_start();
 $postDao = new PostulacionDaoImp();
 $postulacion = new PostulacionDto();
 
-if($_SESSION['perfil']=='Postulante'){
-    $_SESSION['postulante'] = $_SESSION['usuario'];
+if($_SESSION["perfil"]=="Postulante"){
+    $_SESSION["postulante"] = $_SESSION["usuario"];
     
-    include_once './ventanaBuscarPorRut.php';
+    include_once './ventanaAgregarPostulacion.php';
 }else{
     
 

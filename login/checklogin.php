@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <?php
-
+include_once '../dto/UsuarioDto.php';
 $host_db = "127.0.0.1";
 $user_db = "root";
 $pass_db = "";
@@ -27,7 +27,13 @@ $result = $conexion->query($sql);
 if ($result->num_rows > 0) {     
  
  $row = $result->fetch_array(MYSQLI_ASSOC);
-    $usuario = $row;
+    $usuario = new UsuarioDto();
+    $usuario->setRut($row['rut']);
+    $usuario->setNombre($row['nombre']);
+    $usuario->setApellidoPaterno($row['apellido_paterno']);
+    $usuario->setApellidoMaterno($row['apellido_materno']);  
+    $usuario->setPerfil($row['perfil']);
+
     $_SESSION['usuario'] = $usuario;
     $_SESSION['perfil'] = $row['perfil'];
     $_SESSION['nombre'] = $row['nombre'];
