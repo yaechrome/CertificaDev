@@ -66,5 +66,8 @@
         <?php         
         }      
         ?>
+        <br><br>
+        <a href=../login/panel-control.php>Volver</a> <br>
+        <a href=../login/logout.php>Cerrar Sesion</a>
     </body>
 </html>

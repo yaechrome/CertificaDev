@@ -20,11 +20,14 @@
                 <br>
             </div>
         </form>
+        
         <?php
-        if(isset($_SESSION["postulacion"])){ 
-            echo $_SESSION["postulacion"];  
+        if(isset($_SESSION["estadoUltima"])){ 
+            echo $_SESSION["estadoUltima"];  
         }      
         ?>
-        
+        <br><br>
+        <a href=../login/panel-control.php>Volver </a> <br>
+        <a href=../login/logout.php>Cerrar Sesion</a>
     </body>
 </html>

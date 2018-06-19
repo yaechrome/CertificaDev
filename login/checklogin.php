@@ -27,7 +27,8 @@ $result = $conexion->query($sql);
 if ($result->num_rows > 0) {     
  
  $row = $result->fetch_array(MYSQLI_ASSOC);
-    $_SESSION['usuario'] = $row;
+    $usuario = $row;
+    $_SESSION['usuario'] = $usuario;
     $_SESSION['perfil'] = $row['perfil'];
     $_SESSION['nombre'] = $row['nombre'];
     $_SESSION['apPaterno'] = $row['apellido_paterno'];
@@ -37,7 +38,7 @@ if ($result->num_rows > 0) {
     $_SESSION['start'] = time();
     $_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
 
-    //echo "Bienvenido " . $_SESSION['nombre']." !";
+    echo $_SESSION['nombre'].$_SESSION['apPaterno'];
     //echo "<br><br><a href=panel-control.php>Menu</a>"; 
     header("location:panel-control.php"); 
  } else { 

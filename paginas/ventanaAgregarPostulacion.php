@@ -1,3 +1,8 @@
+<?php
+session_start();
+$postulante = $_SESSION["postulante"];
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -101,9 +106,11 @@
         </div>
         </form>
         
+        <br><br>
+        <a href=../login/panel-control.php>Volver</a> <br>
+        <a href=../login/logout.php>Cerrar Sesion</a>
     </body>
-    <a href=../login/panel-control.php>Volver </a>
-    <a href=../login/logout.php>Cerrar Sesion X </a>
+    
 </html>
 <script>
     var vm = new Vue({

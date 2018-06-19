@@ -37,7 +37,7 @@ exit;
     
   <?php 
     if($_SESSION['perfil']=='Postulante'){?>
-  <p><a href="../paginas/ventanaAgregarPostulacion.php" >Crear Postulacion</a></p>
+  <p><a href="../paginas/agregarPostulacion.php" >Crear Postulacion</a></p>
   <p><a href="../paginas/ventanaBuscarPorRut.php" >Estado de Postulacion</a></p>
 
 
@@ -55,6 +55,6 @@ exit;
 
 
 <br><br>
-<a href=logout.php>Cerrar Sesion X </a>
+<a href=logout.php>Cerrar Sesion </a>
 </body>
 </html>

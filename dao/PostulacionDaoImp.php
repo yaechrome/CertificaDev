@@ -258,7 +258,45 @@ class PostulacionDaoImp implements PostulacionDao {
     }
 
     public function BuscarUltimaSolicitud($rut) {
-        
+        $postulacion = null;    
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("Select * from postulacion where fecha_postulacion = "
+                    . "(select max(fecha_postulacion) from postulacion where rut = ?);");
+            $stmt->bindValue(1, $rut);
+            $stmt->execute();
+            $registro = $stmt->fetchAll();
+            foreach ($registro as $value) {
+                $postulacion = new PostulacionDto();
+                $usuarioDao = new UsuarioDaoImp();
+                $comunaDao = new ComunaDaoImp();
+                $educacionDao = new EducacionDaoImp();
+                $usuario = $usuarioDao->buscarPorClavePrimaria($value["rut"]);
+                $educacion = $educacionDao->buscarPorClavePrimaria($value["educacion"]);
+                $comuna = $comunaDao->buscarPorClavePrimaria($value["comuna"]);
+                $postulacion->setId($value["id"]);
+                $postulacion->setUsuario($usuario);
+                $postulacion->setFechaNacimiento($value["fecha_nacimiento"]);
+                $postulacion->setSexo($value["sexo"]);
+                $postulacion->setTelefono($value["telefono"]);
+                $postulacion->setEmail($value["email"]);
+                $postulacion->setDireccion($value["direccion"]);
+                $postulacion->setComuna($comuna);
+                $postulacion->setEducacion($educacion);
+                $postulacion->setExperienciaProgramacion($value["experiencia_programacion"]);
+                $postulacion->setCantidadAhos($value["cantidad_anhos"]);
+                $postulacion->setModalidad($value["modalidad"]);
+                $postulacion->setCurso($value["curso"]);
+                $postulacion->setFechaPostulacion($value["fecha_postulacion"]);
+                $postulacion->setEstado($value["estado"]);
+
+            }
+
+            $pdo = NULL;
+        } catch (Exception $exc) {
+            echo "Error dao al listar postulaciones por rut" . $exc->getMessage();
+        }
+        return $postulacion;
     }
 
 }
