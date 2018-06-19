@@ -67,7 +67,7 @@ function htmlIsOn($algo) {
                                     include_once '../dao/ComunaDaoImp.php';
                                     foreach (ComunaDaoImp::listar() as $value) {
                                         ?>
-                                    <option <?= htmlSelected($postulacion->getComuna() == $value) ?> value="<?= $value->getId() ?>"><?= $value->getDescripcion() ?></option>                                
+                                    <option value="<?= $value->getId() ?>"><?= $value->getDescripcion() ?></option>                                
                                     <?php } ?>
                             </select>
                         </td>
@@ -81,7 +81,7 @@ function htmlIsOn($algo) {
                                     include_once '../dao/EducacionDaoImp.php';
                                     foreach (EducacionDaoImp::listar() as $value) {
                                         ?>
-                                    <option <?= htmlSelected($postulacion->getEducacion() == $value) ?> value="<?= $value->getId() ?>"> <?php echo $value->getDescripcion(); ?></option>                                
+                                    <option value="<?= $value->getId() ?>"> <?php echo $value->getDescripcion(); ?></option>                                
                                     <?php } ?>
                             </select>
                         </td>

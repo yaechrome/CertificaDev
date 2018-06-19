@@ -110,7 +110,7 @@ class PostulacionDaoImp implements PostulacionDao {
             $stmt->bindValue(6, $dto->getDireccion());
             $stmt->bindValue(7, $dto->getComuna());
             $stmt->bindValue(8, $dto->getEducacion());
-            $stmt->bindValue(9, $dto->getExperienciaProgamacion(), PDO::PARAM_BOOL);
+            $stmt->bindValue(9, $dto->getExperienciaProgramacion(), PDO::PARAM_BOOL);
             $stmt->bindValue(10, $dto->getCantidadAhos());
             $stmt->bindValue(11, $dto->getModalidad());
             $stmt->bindValue(12, $dto->getCurso());
