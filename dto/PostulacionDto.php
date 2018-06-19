@@ -139,7 +139,7 @@ class PostulacionDto {
     }
 
     function setFechaPostulacion($fechaPostulacion) {
-        $this->fecha_postulacion = $fechaPostulacion;
+        $this->fechaPostulacion = $fechaPostulacion;
     }
 
 }

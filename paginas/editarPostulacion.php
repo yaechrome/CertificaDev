@@ -11,7 +11,7 @@ $comunaDao = new ComunaDaoImp();
 $direccion = trim($_POST['txtDireccion']);
 $comuna = trim($_POST['cmbComuna']);
 $educacion = trim($_POST['cmbEducacion']);
-$experiencia = trim($_POST['chkExperiencia']);
+$experiencia = trim($_POST['chkExperiencia']) != "";
 $fechaNacimiento = trim($_POST['txtFechaNacimiento']);
 $años = trim($_POST['txtAños']);
 $sexo = trim($_POST['Sexo']);
@@ -21,7 +21,11 @@ $email = trim($_POST['txtEmail']);
 $curso = trim($_POST['cmbCurso']);
 $estado = trim($_POST['Estado']);
 
-$dto = new PostulacionDto();
+
+$dao = new PostulacionDaoImp();
+$id = $_GET['id'];
+$dto = $dao->buscarPorClavePrimaria($id);
+
 $dto->setDireccion($direccion);
 $dto->setComuna($comuna);
 $dto->setEducacion($educacion);
@@ -35,7 +39,6 @@ $dto->setEmail($email);
 $dto->setCurso($curso);
 $dto->setEstado($estado);
 
-$dao = new PostulacionDaoImp();
 $dao->modificar($dto);
 
 include_once 'ventanaEditarPostulacion.php';

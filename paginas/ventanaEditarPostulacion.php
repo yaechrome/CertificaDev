@@ -94,7 +94,7 @@ function htmlIsOn($algo) {
                                 Experiencia laboral en programacion
                             </td>
                             <td>
-                                <input type="checkbox" name="chkExperiencia" <?= htmlChecked($postulacion->getExperienciaProgramacion()) ?> value="" v-on:Click="cambiar"/> 
+                                <input type="checkbox" name="chkExperiencia" <?= htmlChecked($postulacion->getExperienciaProgramacion()) ?> v-on:Click="cambiar"/> 
                             </td>
                             
                         </tr>
