@@ -28,10 +28,10 @@ class ComunaDaoImp implements ComunaDao{
 
     public function buscarPorClavePrimaria($id) {
         $comuna = new ComunaDto();
-        try {
+        try { 
             $pdo= new clasePDO();
             $stmt = $pdo->prepare("SELECT * FROM comuna where id=?");
-            $stmt->bindParam(1, $id);
+            $stmt->bindValue(1, $id);
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $value) {

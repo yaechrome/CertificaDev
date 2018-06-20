@@ -1,20 +1,15 @@
 <?php
 include_once '../dto/UsuarioDto.php';
-include_once '../dto/ComunaDto.php';
-include_once '../dto/EducacionDto.php';
+
 session_start();
 $usuario = $_SESSION["usuario"];
 
 $id = $_GET['id'];
 include_once '../dao/PostulacionDaoImp.php';
-include_once '../dao/ComunaDaoImp.php';
-include_once '../dao/EducacionDaoImp.php';
-$daoComuna = new ComunaDaoImp();
-$daoEducacion = new EducacionDaoImp();
+
 $dao = new PostulacionDaoImp();
 $postulacion = $dao->buscarPorClavePrimaria($id);
-$comuna = $daoComuna->buscarPorClavePrimaria($postulacion->getComuna());
-$educacion = $daoEducacion->buscarPorClavePrimaria($postulacion->getEducacion());
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,13 +37,13 @@ $educacion = $daoEducacion->buscarPorClavePrimaria($postulacion->getEducacion())
                         <td>Apellido Paterno</td>
                         <td><?= $usuario->getApellidoPaterno() ?></td>
                         <td>Comuna</td>
-                        <td><?= $comuna->getDescripcion() ?></td>
+                        <td><?= $postulacion->getComuna()->getDescripcion() ?></td>
                     </tr>
                     <tr>
                         <td>Apellido Materno</td>
                         <td><?= $usuario->getApellidoMaterno() ?></td>
                         <td>Educacion</td>
-                        <td><?= $educacion->getDescripcion() ?></td>
+                        <td><?= $postulacion->getEducacion()->getDescripcion() ?></td>
                     </tr>
                     <tr>
                         <td>Fecha Nacimiento</td>
@@ -71,6 +66,6 @@ $educacion = $daoEducacion->buscarPorClavePrimaria($postulacion->getEducacion())
                 </tbody>
             </table>
         </form>
-        <input type="submit" value="Volver" name="btnVolver" />
+        <a href=../login/panel-control.php>Volver</a> <br>
     </body>
 </html>
