@@ -16,7 +16,7 @@ if($_SESSION['perfil']=='Postulante'){
     }else{
         $postulacion = $dao->BuscarUltimaSolicitud($rut);
         IF($postulacion!=null){
-            $estadoUltima = 'Estado de postulación : '.$postulacion->getEstado();
+            $estadoUltima = 'Estado de solicitud : '.$postulacion->getEstado();
         }ELSE{
             $estadoUltima = 'No existe ninguna solicitud registrada con ese rut';
         }
