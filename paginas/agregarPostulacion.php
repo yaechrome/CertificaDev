@@ -14,13 +14,13 @@ $postulacion = new PostulacionDto();
 
 $user = $_SESSION["postulante"];
 
-print_r($_POST);
+//print_r($_POST);
 $direccion = trim($_POST['txtDireccion']);
 $comuna = trim($_POST['cmbComuna']);
 $educacion = trim($_POST['cmbEducacion']);
 $experiencia = isset($_POST['chkExperiencia']) ? trim($_POST['chkExperiencia']) : "";
 $fechaNacimiento = trim($_POST['txtFechaNacimiento']);
-$años = isset($_POST['txtAhos']) ? trim($_POST['txtAhos']) : "";
+$años = isset($_POST['txtAhos']) ? trim($_POST['txtAhos']) : 0;
 $sexo = trim($_POST['Sexo']);
 $telefono = trim($_POST['txtTelefono']);
 $modalidad = trim($_POST['cmbModalidad']);
