@@ -19,21 +19,40 @@ if ($now > $_SESSION['expire']) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Menu</title>
-    </head>
-    <body>
-        <h1>Menu</h1>
-        <ul>
-            <?php if ($_SESSION['perfil'] == 'Postulante') { ?>
-                <p><a href="../paginas/validarPostulante.php" >Crear Postulacion</a></p>
-                <p><a href="../paginas/ventanaBuscarPorRut.php" >Estado de Postulacion</a></p>
-            <?php } else { ?>
-                <p><a href="../paginas/validarPostulante.php" >Crear Postulacion</a></p>
-                <p><a href="../paginas/ventanaBuscarSolicitud.php" >Buscar Postulacion</a></p>
-            <?php } ?>
-        </ul>
-
-        <br><br>
-        <a href=logout.php>Cerrar Sesion </a>
-    </body>
+        <link rel="stylesheet" href="../static/css/codebeautify.css" type="text/css"/>
+    <div class="text_right">
+        <a class="btn red darken-1" href=logout.php>Cerrar Sesion </a>
+    </div>
+    <title>Menu</title>
+</head>
+<body>
+    <main role="main">
+        <section class="container">
+            <div class="row mb0 center-align relative full">
+                <div class="center">
+                    <div class="col s12 m6 offset-m3 l4 offset-l4">
+                        <div class="card">
+                            <div class="card-panel pad0">
+                                <div class="card-content pad24">
+                                    <div class="mb20"><h3 class="big header black-text">MENU</h3></div>   
+                                    <ul>
+                                        <?php if ($_SESSION['perfil'] == 'Postulante') { ?>
+                                            <p><a class="btn purple lighten-1" href="../paginas/validarPostulante.php" >Crear Postulacion</a></p>
+                                            <br>
+                                            <p><a class="btn purple lighten-1" href="../paginas/ventanaBuscarPorRut.php" >Estado de Postulacion</a></p>
+                                        <?php } else { ?>
+                                            <p><a class="btn purple lighten-1" href="../paginas/validarPostulante.php" >Crear Postulacion</a></p>
+                                            <br>
+                                            <p><a class="btn purple lighten-1" href="../paginas/ventanaBuscarSolicitud.php" >Buscar Postulacion</a></p>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
 </html>
