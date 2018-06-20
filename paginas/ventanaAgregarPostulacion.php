@@ -3,21 +3,10 @@ include_once '../dto/UsuarioDto.php';
 
 $postulante = $_SESSION["postulante"];
 
-function jsBoolean($algo) {
-    return $algo ? "true" : "false";
-}
-
 function htmlChecked($algo) {
     return $algo ? "checked" : "";
 }
 
-function htmlSelected($algo) {
-    return $algo ? "selected" : "";
-}
-
-function htmlIsOn($algo) {
-    return $algo ? "1" : "0";
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -120,8 +109,8 @@ function htmlIsOn($algo) {
                         <td><input type="text" name="txtTelefono" value="" required="true" /></td>
                         <td>Modalidad</td>
                         <td><select name="cmbModalidad">
-                                <option <?= htmlSelected($postulacion->getModalidad() == "Diurno") ?>>Diurno</option>
-                                <option <?= htmlSelected($postulacion->getModalidad() == "Vespertino") ?>>Vespertino</option>
+                                <option value="Diurno">Diurno</option>
+                                <option value="Vespertino">Vespertino</option>
                             </select></td>
                     </tr>
                     <tr>
@@ -129,9 +118,9 @@ function htmlIsOn($algo) {
                         <td><input type="text" name="txtEmail" value="" required="true"/></td>
                         <td>Curso</td>
                         <td><select name="cmbCurso">
-                                <option <?= htmlSelected($postulacion->getCurso() == "Java") ?>>Java</option>
-                                <option <?= htmlSelected($postulacion->getCurso() == ".Net") ?>>.Net</option>
-                                <option <?= htmlSelected($postulacion->getCurso() == "Php") ?>>Php</option>
+                                <option value="Java">Java</option>
+                                <option value=".Net">.Net</option>
+                                <option value="Php">Php</option>
                             </select></td>
                     </tr>
                 </tbody>
