@@ -58,7 +58,11 @@
                             <td><?php echo $dto->getUsuario()->getRut(); ?></td>
                             <td><?php echo $dto->getUsuario()->getNombre().' '.$dto->getUsuario()->getApellidoPaterno().' '.$dto->getUsuario()->getApellidoMaterno(); ?></td>
                             <td><?php echo $dto->getEstado(); ?></td>
-                            <td><a href="ventanaEditarPostulacion.php?id=<?php echo $dto->getId(); ?>">Editar</a></td>                          
+                            <td>
+                                <a href="ventanaVerFichaPostulante.php?id=<?php echo $dto->getId(); ?>">Ver</a>
+                                <a href="ventanaEditarPostulacion.php?id=<?php echo $dto->getId(); ?>">Editar</a>
+                                <a href="ventanaEliminarPostulacion.php?id=<?php echo $dto->getId(); ?>">Eliminar</a>
+                            </td>                          
                         </tr>
                     <?php } ?>
                 </tbody>

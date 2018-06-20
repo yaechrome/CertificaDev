@@ -100,7 +100,7 @@ class PostulacionDaoImp implements PostulacionDao {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("INSERT INTO postulacion(rut, fecha_nacimiento,"
                     . "sexo, telefono,email,direccion,comuna, educacion,experiencia_programacion,"
-                    . "cantidad_anhos, modalidad, curso, fecha_postulacion) VALUES(?,?,?,?,?,?,?,?,?,?,?, now())");
+                    . "cantidad_anhos, modalidad, curso, fecha_postulacion) VALUES(?,?,?,?,?,?,?,?,?,?,?,?, now())");
 
             $stmt->bindValue(1, $dto->getUsuario()->getRut());
             $stmt->bindValue(2, $dto->getFechaNacimiento());
