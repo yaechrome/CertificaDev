@@ -17,6 +17,13 @@ if($_SESSION['perfil']=='Postulante'){
         $postulacion = $dao->BuscarUltimaSolicitud($rut);
         IF($postulacion!=null){
             $estadoUltima = 'Estado de solicitud : '.$postulacion->getEstado();
+            
+            if($postulacion->getEstado() == 'Aprobado'){
+                $estadoUltima += ' Dentro de un plazo máximo de 48 horas, uno de nuestros ejecutivos se pondrá en contacto con usted';
+            }else if( $postulacion->getEstado() == 'Rechazado'){
+                $estadoUltima += 'Para más información puede llamarnos al número que aparece en nuestra página oficial';    
+            }
+            
         }ELSE{
             $estadoUltima = 'No existe ninguna solicitud registrada con ese rut';
         }

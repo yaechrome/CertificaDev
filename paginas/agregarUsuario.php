@@ -40,5 +40,4 @@ $mensaje = null;
     
 
 
-header("location:../login/Login.html"); 
-include_once 'ventanaAgregarUsuario.php';
+include_once '../login/Registrarse.php';

@@ -6,4 +6,4 @@
  * and open the template in the editor.
  */
 
-header("location:paginas/ventanaAgregarUsuario.php"); 
+header("location:../login/Login.html"); 
