@@ -23,6 +23,7 @@ if ($now > $_SESSION['expire']) {
     <div class="text_right">
         <a class="btn red darken-1" href=logout.php>Cerrar Sesion </a>
     </div>
+    <h5><?php echo 'Bienvenido '.$_SESSION['NombreCompleto'];?></h5>
     <title>Menu</title>
 </head>
 <body>
