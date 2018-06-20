@@ -16,20 +16,21 @@ if($rut==""){
     include_once './ventanaBuscarPostulante.php';
 }else{
     $user = $userDao->buscarPorClavePrimaria($rut);
+    $_SESSION["postulante"] = $user;
     if($user==null){
         echo "<script> alert('RUT no pertenece a un usuario registrado') </script>";
         include_once './ventanaBuscarPostulante.php';
     }else{
             $ultima = $postDao->BuscarUltimaSolicitud($user->getRut());
             if($ultima== null){
-                $_SESSION["postulante"] = $user;
+               
                  include_once './ventanaAgregarPostulacion.php';
             }else{
                 if($ultima->getEstado()== 'Pendiente'){
                     echo "<script> alert('Ya existe una postulacion pendiente') </script>";
                     include_once '../login/panel-control.php';
                 }else{
-                    $_SESSION["postulante"] = $user;
+                    
                     include_once './ventanaAgregarPostulacion.php';
                 }
             }

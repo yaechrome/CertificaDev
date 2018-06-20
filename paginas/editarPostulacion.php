@@ -8,6 +8,7 @@ include_once '../dao/PostulacionDaoImp.php';
 
 $comunaDao = new ComunaDaoImp();
 
+
 $direccion = trim($_POST['txtDireccion']);
 $comuna = trim($_POST['cmbComuna']);
 $educacion = trim($_POST['cmbEducacion']);
