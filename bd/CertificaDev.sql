@@ -125,6 +125,9 @@ CREATE TABLE `Usuario` (
   PRIMARY KEY (`rut`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/*Data for the table `usuario` */
+
+insert into `usuario` (`rut`,`nombre`,`apellido_paterno`,`apellido_materno`,`contrasena`,`perfil`) values ('1-1','Arturo','Vargas','Reyes','arturo','Ejecutivo'),('2-2','Juan','Perez','Tapia','123','Postulante');
 
 
 # Volcado de tabla Postulacion
