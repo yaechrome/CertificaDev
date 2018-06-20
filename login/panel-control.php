@@ -23,7 +23,6 @@ if ($now > $_SESSION['expire']) {
     <div class="text_right">
         <a class="btn red darken-1" href=logout.php>Cerrar Sesion </a>
     </div>
-    <h5><?php echo 'Bienvenido '.$_SESSION['NombreCompleto'];?></h5>
     <title>Menu</title>
 </head>
 <body>
@@ -31,6 +30,9 @@ if ($now > $_SESSION['expire']) {
         <section class="container">
             <div class="row mb0 center-align relative full">
                 <div class="center">
+                    <div class="text_center">
+                        <h5 class="small title black-text"><?php echo 'Bienvenido ' . $_SESSION['NombreCompleto']; ?></h5>
+                    </div>
                     <div class="col s12 m6 offset-m3 l4 offset-l4">
                         <div class="card">
                             <div class="card-panel pad0">
