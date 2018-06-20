@@ -1,14 +1,16 @@
 <?php
 include_once '../dto/UsuarioDto.php';
-
 session_start();
-$usuario = $_SESSION["usuario"];
+
 
 $id = $_GET['id'];
 include_once '../dao/PostulacionDaoImp.php';
-
+include_once '../dao/UsuarioDaoImp.php';
+$daoUsuario = new UsuarioDaoImp();
 $dao = new PostulacionDaoImp();
 $postulacion = $dao->buscarPorClavePrimaria($id);
+$usuario = $daoUsuario->buscarPorClavePrimaria($postulacion->getUsuario()->getRut());
+
 ?>
 <!DOCTYPE html>
 <html>
