@@ -4,6 +4,7 @@ session_start();
 unset ($SESSION['username']);
 session_destroy();
 
-header('Location: Login.html');
+$url =  "//{$_SERVER['HTTP_HOST']}/login/Login.html";
+header("Location: {$url}");
 
 ?>
