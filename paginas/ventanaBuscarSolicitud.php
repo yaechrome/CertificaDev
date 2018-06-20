@@ -61,7 +61,7 @@
                             <td>
                                 <a href="ventanaVerFichaPostulante.php?id=<?php echo $dto->getId(); ?>">Ver</a>
                                 <a href="ventanaEditarPostulacion.php?id=<?php echo $dto->getId(); ?>">Editar</a>
-                                <a href="ventanaEliminarPostulacion.php?id=<?php echo $dto->getId(); ?>">Eliminar</a>
+                                <a href="eliminarPostulacion.php?id=<?php echo $dto->getId(); ?>">Eliminar</a>
                             </td>                          
                         </tr>
                     <?php } ?>
