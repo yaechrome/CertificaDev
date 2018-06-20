@@ -51,6 +51,7 @@ if($direccion == "" || $fechaNacimiento == "" ||  $telefono == "" || $email == "
     }else{
         echo "<script> alert('Debe ingresar todos los datos') </script>";
     }
+    include_once '../login/panel-control.php';
 }
 
 //echo 'dir '.$direccion.' comuna '.$comuna.' $educacion '.$educacion.' experiencia '.$experiencia.' fecha nac '.$fechaNacimiento
