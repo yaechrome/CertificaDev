@@ -55,7 +55,7 @@ function htmlIsOn($algo) {
                         <td>Rut</td>
                         <td><input type="text" name="txtRut" value="<?= $postulante->getRut() ?>" disabled="true"/></td>
                         <td>Direccion</td>
-                        <td><input type="text" name="txtDireccion" value="" v-on:/></td>
+                        <td><input type="text" name="txtDireccion" required="true" value="" v-on:/></td>
                     </tr>
                     
                     <tr>
@@ -98,7 +98,7 @@ function htmlIsOn($algo) {
                     </tr>
                     <tr>
                         <td>Fecha Nacimiento</td>
-                        <td><input type="Date"  name="txtFechaNacimiento" value="" /></td>
+                        <td><input type="Date"  name="txtFechaNacimiento" value="" required="true" /></td>
                         <td>
                             cantidad años 
                         </td>
@@ -117,7 +117,7 @@ function htmlIsOn($algo) {
                     </tr>
                     <tr>
                         <td>Telefono</td>
-                        <td><input type="text" name="txtTelefono" value="" /></td>
+                        <td><input type="text" name="txtTelefono" value="" required="true" /></td>
                         <td>Modalidad</td>
                         <td><select name="cmbModalidad">
                                 <option <?= htmlSelected($postulacion->getModalidad() == "Diurno") ?>>Diurno</option>
@@ -126,7 +126,7 @@ function htmlIsOn($algo) {
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input type="text" name="txtEmail" value="" /></td>
+                        <td><input type="text" name="txtEmail" value="" required="true"/></td>
                         <td>Curso</td>
                         <td><select name="cmbCurso">
                                 <option <?= htmlSelected($postulacion->getCurso() == "Java") ?>>Java</option>
@@ -142,10 +142,10 @@ function htmlIsOn($algo) {
         </form>
         
         <br><br>
-        <a href=../login/panel-control.php>Volver</a> <br>
+        <a href=../login/volver.php>Volver</a> <br>
         <a href=../login/logout.php>Cerrar Sesion</a>
     </body>
     
-</html>
+</html> 
 
 

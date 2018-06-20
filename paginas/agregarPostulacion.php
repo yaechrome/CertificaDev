@@ -27,13 +27,9 @@ $modalidad = trim($_POST['cmbModalidad']);
 $email = trim($_POST['txtEmail']);
 $curso = trim($_POST['cmbCurso']);
 
-if($años==null){
-    $años = 0;
-}
 
-if($direccion == "" || $fechaNacimiento == "" ||  $telefono == "" || $email == ""){
-    echo "<script> alert('Debe ingresar todos los datos') </script>";
-}else{
+
+
     $postulacion->setDireccion($direccion);
     $postulacion->setUsuario($user);
     $postulacion->setComuna($comuna);
@@ -53,7 +49,7 @@ if($direccion == "" || $fechaNacimiento == "" ||  $telefono == "" || $email == "
         echo "<script> alert('Debe ingresar todos los datos') </script>";
     }
     include_once '../login/panel-control.php';
-}
+
 
 //echo 'dir '.$direccion.' comuna '.$comuna.' $educacion '.$educacion.' experiencia '.$experiencia.' fecha nac '.$fechaNacimiento
 //        .' cantidad '.$años.' sexo '.$sexo.' email '.$email.' curso '.$curso;
