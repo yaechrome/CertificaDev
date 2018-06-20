@@ -16,27 +16,27 @@ and open the template in the editor.
                 <tbody>
                     <tr>
                         <td>Rut</td>
-                        <td><input type="text" name="txtRut" value="" /></td>
+                        <td><input type="text" name="txtRut" value="" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Nombre</td>
-                        <td><input type="text" name="txtNombre" value="" /></td>
+                        <td><input type="text" name="txtNombre" value="" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Apellido Paterno</td>
-                        <td><input type="text" name="txtApellidoPaterno" value="" /></td>
+                        <td><input type="text" name="txtApellidoPaterno" value="" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Apellido Materno</td>
-                        <td><input type="text" name="txtApellidoMaterno" value="" /></td>
+                        <td><input type="text" name="txtApellidoMaterno" value="" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Contraseña</td>
-                        <td><input type="password" name="txtContraseña1" value="" /></td>
+                        <td><input type="password" name="txtContraseña1" value="" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Repetir Contraseña</td>
-                        <td><input type="password" name="txtContraseña2" value="" /></td>
+                        <td><input type="password" name="txtContraseña2" value="" required="true"/></td>
                     </tr>
                 </tbody>
             </table>

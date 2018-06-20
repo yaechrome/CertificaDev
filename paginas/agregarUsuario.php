@@ -11,11 +11,7 @@ $contrasena1 = trim($_POST["txtContraseña1"]);
 $contrasena2 = trim($_POST["txtContraseña2"]);
 $mensaje = null;
 
-if($rut== "" || $nombre== "" || $apellidoP== "" || $apellidoM== "" || $contrasena1== "" || $contrasena2== ""){
-    
-    $mensaje= "Debe ingresar todos los datos solicitados";
-    
-}else{
+
     $buscar= $dao->existeRegistro($rut);
     if($buscar){
         $mensaje= "Usuario ya existe";
@@ -42,7 +38,7 @@ if($rut== "" || $nombre== "" || $apellidoP== "" || $apellidoM== "" || $contrasen
         }
     }
     
-}
+
 
 header("location:../login/Login.html"); 
 include_once 'ventanaAgregarUsuario.php';
