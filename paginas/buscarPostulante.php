@@ -10,7 +10,7 @@ include_once '../dto/UsuarioDto.php';
 $userDao = new UsuarioDaoImp();
 $postDao = new PostulacionDaoImp();
 $rut = trim($_POST["txtRut"]);
-
+$postulacion = new PostulacionDto();
 if($rut==""){
      echo "<script> alert('Debe ingresar un rut') </script>";
     include_once './ventanaBuscarPostulante.php';
@@ -20,7 +20,6 @@ if($rut==""){
         echo "<script> alert('RUT no pertenece a un usuario registrado') </script>";
         include_once './ventanaBuscarPostulante.php';
     }else{
-        
             $ultima = $postDao->BuscarUltimaSolicitud($user->getRut());
             if($ultima== null){
                 $_SESSION["postulante"] = $user;
