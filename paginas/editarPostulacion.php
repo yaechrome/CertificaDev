@@ -12,19 +12,15 @@ $comunaDao = new ComunaDaoImp();
 $direccion = trim($_POST['txtDireccion']);
 $comuna = trim($_POST['cmbComuna']);
 $educacion = trim($_POST['cmbEducacion']);
-$experiencia = trim($_POST['chkExperiencia']) != "";
+$experiencia = isset($_POST['chkExperiencia']) ? trim($_POST['chkExperiencia']) : "";
 $fechaNacimiento = trim($_POST['txtFechaNacimiento']);
-$años = trim($_POST['txtAños']);
+$años = isset($_POST['txtAños']) ? trim($_POST['txtAños']) : 0;
 $sexo = trim($_POST['Sexo']);
 $telefono = trim($_POST['txtTelefono']);
 $modalidad = trim($_POST['cmbModalidad']);
 $email = trim($_POST['txtEmail']);
 $curso = trim($_POST['cmbCurso']);
 $estado = trim($_POST['Estado']);
-
-if($años==null){
-    $años = 0;
-}
 
 $dao = new PostulacionDaoImp();
 $id = $_GET['id'];
@@ -43,6 +39,10 @@ $dto->setEmail($email);
 $dto->setCurso($curso);
 $dto->setEstado($estado);
 
-$dao->modificar($dto);
+if($dao->modificar($dto)){
+   echo "<script> alert('Postulacion modificada con exito') </script>";
+}else{
+        echo "<script> alert('Error al modificar') </script>";
+}
 
-include_once 'ventanaEditarPostulacion.php';
+include_once '../login/volver.php';

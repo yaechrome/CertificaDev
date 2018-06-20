@@ -18,6 +18,7 @@ $postulacion = $dao->buscarPorClavePrimaria($id);
         <title></title>
     </head>
     <body>
+        <h2>Ficha de Postulacion</h2>
         <form action="verFichaPostulante.php" method="POST">
             <table border="0">
                 <tbody>
@@ -66,6 +67,8 @@ $postulacion = $dao->buscarPorClavePrimaria($id);
                 </tbody>
             </table>
         </form>
-        <a href=../login/panel-control.php>Volver</a> <br>
+        <br><br>
+        <a href=../login/volver.php>Volver</a> <br>
+        <a href=../login/logout.php>Cerrar Sesion</a>
     </body>
 </html>

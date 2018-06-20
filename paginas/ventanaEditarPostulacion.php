@@ -152,5 +152,9 @@ function htmlIsOn($algo) {
                 </table>  
             </div>
         </form>
+        
+        <br><br>
+        <a href=../login/volver.php>Volver</a> <br>
+        <a href=../login/logout.php>Cerrar Sesion</a>
     </body>
 </html>

@@ -24,5 +24,9 @@ and open the template in the editor.
                 <br>
             </div>
         </form>
+        
+        <br><br>
+        <a href=../login/volver.php>Volver</a> <br>
+        <a href=../login/logout.php>Cerrar Sesion</a>
     </body>
 </html>
