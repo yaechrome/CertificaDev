@@ -1,26 +1,3 @@
-<?php
-include_once '../dto/UsuarioDto.php';
-session_start();
-$usuario = $_SESSION["usuario"];
-$rut = $usuario->getRut();
-
-include_once '../dao/PostulacionDaoImp.php';
-$dao = new PostulacionDaoImp();
-$postulacion = $dao->BuscarUltimaSolicitud($rut);
-
-if ($postulacion != null) {
-    $estadoUltima = 'Estado de solicitud : ' . $postulacion->getEstado();
-
-    if ($postulacion->getEstado() == 'Aprobado') {
-        $estadoUltima += ' Dentro de un plazo máximo de 48 horas, uno de nuestros ejecutivos se pondrá en contacto con usted';
-    } else if ($postulacion->getEstado() == 'Rechazado') {
-        $estadoUltima += 'Para más información puede llamarnos al número que aparece en nuestra página oficial';
-    }
-} else {
-    $estadoUltima = 'No existe ninguna solicitud registrada con ese rut';
-}
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,7 +6,26 @@ if ($postulacion != null) {
         <title></title>
     </head>
     <body>
-        <?= $estadoUltima ?>
+        <form action="buscarSolicitudPorRut.php" method="POST">
+            <div>
+                <h6>Buscar Por Rut</h6>
+                <table border="1">
+                    <tbody>
+                        <tr>
+                            <td>Rut <input type="text" name="txtRut" value="" /></td>
+                            <td> <input type="submit" value="Buscar" name="btnBuscarPorRut" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </form>
+        
+        <?php
+        if(isset($_SESSION["estadoUltima"])){ 
+            echo $_SESSION["estadoUltima"];  
+        }      
+        ?>
         <br><br>
         <a href=../login/volver.php>Volver</a> <br>
         <a href=../login/logout.php>Cerrar Sesion</a>
